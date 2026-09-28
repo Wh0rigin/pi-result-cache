@@ -51,6 +51,17 @@ npm run benchmark
 python scripts/charts.py
 ```
 
+The long-session experiment performs 4, 8, and 12 identical reads in one Pi process and also records the per-request growth trajectory:
+
+```bash
+npm run benchmark:long
+npm run charts:long
+```
+
+See the [full long-session validation report](docs/long-session-validation.md) for all charts and findings.
+
+Across three paired seeds, the mean prompt-token reduction grew with session length: 46.7% at 4 reads, 71.7% at 8 reads, and 79.6% at 12 reads. At 12 reads, baseline exact-answer accuracy was 2/3 versus 3/3 with deduplication; strict read-protocol adherence was 0/3 versus 3/3. See the report for the detailed data and limitations.
+
 Override the model or number of paired runs:
 
 ```powershell

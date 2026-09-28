@@ -53,6 +53,17 @@ npm run benchmark
 python scripts/charts.py
 ```
 
+长会话实验会在同一个 Pi 进程内连续执行 4、8、12 次相同读取，并生成累计增长曲线：
+
+```bash
+npm run benchmark:long
+npm run charts:long
+```
+
+完整的长会话图表和结论见[长会话实验报告](docs/long-session-validation.md)。
+
+本轮 3 个种子配对实验中，prompt token 平均减少比例随读取次数增加而上升：4 次为 46.7%，8 次为 71.7%，12 次为 79.6%。12 次条件下基线准确率为 2/3、去重组为 3/3；严格读取协议分别为 0/3 和 3/3。详细数据和限制见报告。
+
 覆盖模型或配对运行次数：
 
 ```powershell

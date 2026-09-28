@@ -1,0 +1,2038 @@
+{
+  "generatedAt": "2026-09-28T11:28:27.603Z",
+  "model": "cc-switch-packy-code/glm-5.3-flash",
+  "piVersion": "0.87.1",
+  "repetitionsPerCondition": 3,
+  "repeats": [
+    4,
+    8,
+    12
+  ],
+  "fixture": {
+    "rowCount": 72,
+    "targetRow": 53
+  },
+  "task": "One Pi process performs the same full-file read repeatedly and returns a target token after the final read.",
+  "arms": [
+    "baseline (extension disabled)",
+    "dedupe (request-local context deduplication)"
+  ],
+  "results": [
+    {
+      "arm": "baseline",
+      "seed": 1,
+      "repeats": 4,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 8081,
+      "cacheReadTokens": 13824,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 21905,
+      "outputTokens": 77,
+      "totalTokensProcessed": 21982,
+      "assistantRequests": 5,
+      "wallSeconds": 39.019,
+      "readCalls": 4,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-27DB49E670",
+      "answer": "TOKEN-27DB49E670",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 831,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 831,
+          "outputTokens": 28,
+          "totalTokensProcessed": 859
+        },
+        {
+          "request": 2,
+          "inputTokens": 1847,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2615,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2628
+        },
+        {
+          "request": 3,
+          "inputTokens": 1824,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4384,
+          "outputTokens": 13,
+          "totalTokensProcessed": 4397
+        },
+        {
+          "request": 4,
+          "inputTokens": 1801,
+          "cacheReadTokens": 4352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6153,
+          "outputTokens": 13,
+          "totalTokensProcessed": 6166
+        },
+        {
+          "request": 5,
+          "inputTokens": 1778,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7922,
+          "outputTokens": 10,
+          "totalTokensProcessed": 7932
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 1,
+      "repeats": 4,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 4851,
+      "cacheReadTokens": 6848,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 11699,
+      "outputTokens": 62,
+      "totalTokensProcessed": 11761,
+      "assistantRequests": 5,
+      "wallSeconds": 30.751,
+      "readCalls": 4,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-27DB49E670",
+      "answer": "TOKEN-27DB49E670",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 6,
+      "estimatedTokensSuppressed": 5496,
+      "suppressedCharacters": 21990,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 63,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 831,
+          "outputTokens": 13,
+          "totalTokensProcessed": 844
+        },
+        {
+          "request": 2,
+          "inputTokens": 1832,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2600,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2613
+        },
+        {
+          "request": 3,
+          "inputTokens": 118,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2678,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2691
+        },
+        {
+          "request": 4,
+          "inputTokens": 2756,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2756,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2769
+        },
+        {
+          "request": 5,
+          "inputTokens": 82,
+          "cacheReadTokens": 2752,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2834,
+          "outputTokens": 10,
+          "totalTokensProcessed": 2844
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 2,
+      "repeats": 4,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 8066,
+      "cacheReadTokens": 13888,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 21954,
+      "outputTokens": 74,
+      "totalTokensProcessed": 22028,
+      "assistantRequests": 5,
+      "wallSeconds": 26.521,
+      "readCalls": 4,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-557579D9EE",
+      "answer": "TOKEN-557579D9EE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 832,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 832,
+          "outputTokens": 24,
+          "totalTokensProcessed": 856
+        },
+        {
+          "request": 2,
+          "inputTokens": 1786,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2618,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2631
+        },
+        {
+          "request": 3,
+          "inputTokens": 1833,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4393,
+          "outputTokens": 13,
+          "totalTokensProcessed": 4406
+        },
+        {
+          "request": 4,
+          "inputTokens": 1816,
+          "cacheReadTokens": 4352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6168,
+          "outputTokens": 13,
+          "totalTokensProcessed": 6181
+        },
+        {
+          "request": 5,
+          "inputTokens": 1799,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7943,
+          "outputTokens": 11,
+          "totalTokensProcessed": 7954
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 2,
+      "repeats": 4,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 5700,
+      "cacheReadTokens": 6016,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 11716,
+      "outputTokens": 63,
+      "totalTokensProcessed": 11779,
+      "assistantRequests": 5,
+      "wallSeconds": 27.244,
+      "readCalls": 4,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-557579D9EE",
+      "answer": "TOKEN-557579D9EE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 6,
+      "estimatedTokensSuppressed": 5496,
+      "suppressedCharacters": 21990,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 832,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 832,
+          "outputTokens": 13,
+          "totalTokensProcessed": 845
+        },
+        {
+          "request": 2,
+          "inputTokens": 1775,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2607,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2620
+        },
+        {
+          "request": 3,
+          "inputTokens": 123,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2683,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2696
+        },
+        {
+          "request": 4,
+          "inputTokens": 2759,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2759,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2772
+        },
+        {
+          "request": 5,
+          "inputTokens": 211,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2835,
+          "outputTokens": 11,
+          "totalTokensProcessed": 2846
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 3,
+      "repeats": 4,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 14937,
+      "cacheReadTokens": 7040,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 21977,
+      "outputTokens": 101,
+      "totalTokensProcessed": 22078,
+      "assistantRequests": 5,
+      "wallSeconds": 47.042,
+      "readCalls": 4,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-3B07579EDE",
+      "answer": "TOKEN-3B07579EDE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 831,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 831,
+          "outputTokens": 36,
+          "totalTokensProcessed": 867
+        },
+        {
+          "request": 2,
+          "inputTokens": 2560,
+          "cacheReadTokens": 64,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2624,
+          "outputTokens": 18,
+          "totalTokensProcessed": 2642
+        },
+        {
+          "request": 3,
+          "inputTokens": 1775,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4399,
+          "outputTokens": 18,
+          "totalTokensProcessed": 4417
+        },
+        {
+          "request": 4,
+          "inputTokens": 1822,
+          "cacheReadTokens": 4352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6174,
+          "outputTokens": 18,
+          "totalTokensProcessed": 6192
+        },
+        {
+          "request": 5,
+          "inputTokens": 7949,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7949,
+          "outputTokens": 11,
+          "totalTokensProcessed": 7960
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 3,
+      "repeats": 4,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 2923,
+      "cacheReadTokens": 8768,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 11691,
+      "outputTokens": 63,
+      "totalTokensProcessed": 11754,
+      "assistantRequests": 5,
+      "wallSeconds": 29.403,
+      "readCalls": 4,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-3B07579EDE",
+      "answer": "TOKEN-3B07579EDE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 6,
+      "estimatedTokensSuppressed": 5496,
+      "suppressedCharacters": 21990,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 767,
+          "cacheReadTokens": 64,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 831,
+          "outputTokens": 13,
+          "totalTokensProcessed": 844
+        },
+        {
+          "request": 2,
+          "inputTokens": 1833,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2601,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2614
+        },
+        {
+          "request": 3,
+          "inputTokens": 117,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2677,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2690
+        },
+        {
+          "request": 4,
+          "inputTokens": 129,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2753,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2766
+        },
+        {
+          "request": 5,
+          "inputTokens": 77,
+          "cacheReadTokens": 2752,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2829,
+          "outputTokens": 11,
+          "totalTokensProcessed": 2840
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 1,
+      "repeats": 8,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 17057,
+      "cacheReadTokens": 70848,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 87905,
+      "outputTokens": 127,
+      "totalTokensProcessed": 88032,
+      "assistantRequests": 10,
+      "wallSeconds": 50.398,
+      "readCalls": 9,
+      "sameReadArguments": false,
+      "protocolCompliant": false,
+      "expectedAnswer": "TOKEN-27DB49E670",
+      "answer": "TOKEN-27DB49E670",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 830,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 830,
+          "outputTokens": 13,
+          "totalTokensProcessed": 843
+        },
+        {
+          "request": 2,
+          "inputTokens": 1831,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2599,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2612
+        },
+        {
+          "request": 3,
+          "inputTokens": 1808,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4368,
+          "outputTokens": 13,
+          "totalTokensProcessed": 4381
+        },
+        {
+          "request": 4,
+          "inputTokens": 1785,
+          "cacheReadTokens": 4352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6137,
+          "outputTokens": 13,
+          "totalTokensProcessed": 6150
+        },
+        {
+          "request": 5,
+          "inputTokens": 1826,
+          "cacheReadTokens": 6080,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7906,
+          "outputTokens": 13,
+          "totalTokensProcessed": 7919
+        },
+        {
+          "request": 6,
+          "inputTokens": 1803,
+          "cacheReadTokens": 7872,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 9675,
+          "outputTokens": 13,
+          "totalTokensProcessed": 9688
+        },
+        {
+          "request": 7,
+          "inputTokens": 1780,
+          "cacheReadTokens": 9664,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 11444,
+          "outputTokens": 13,
+          "totalTokensProcessed": 11457
+        },
+        {
+          "request": 8,
+          "inputTokens": 1821,
+          "cacheReadTokens": 11392,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 13213,
+          "outputTokens": 13,
+          "totalTokensProcessed": 13226
+        },
+        {
+          "request": 9,
+          "inputTokens": 1798,
+          "cacheReadTokens": 13184,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 14982,
+          "outputTokens": 13,
+          "totalTokensProcessed": 14995
+        },
+        {
+          "request": 10,
+          "inputTokens": 1775,
+          "cacheReadTokens": 14976,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 16751,
+          "outputTokens": 10,
+          "totalTokensProcessed": 16761
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 1,
+      "repeats": 8,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 866,
+      "cacheReadTokens": 22912,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 23778,
+      "outputTokens": 114,
+      "totalTokensProcessed": 23892,
+      "assistantRequests": 9,
+      "wallSeconds": 47.74,
+      "readCalls": 8,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-27DB49E670",
+      "answer": "TOKEN-27DB49E670",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 28,
+      "estimatedTokensSuppressed": 25652,
+      "suppressedCharacters": 102620,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 62,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 830,
+          "outputTokens": 13,
+          "totalTokensProcessed": 843
+        },
+        {
+          "request": 2,
+          "inputTokens": 39,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2599,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2612
+        },
+        {
+          "request": 3,
+          "inputTokens": 116,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2676,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2689
+        },
+        {
+          "request": 4,
+          "inputTokens": 129,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2753,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2766
+        },
+        {
+          "request": 5,
+          "inputTokens": 78,
+          "cacheReadTokens": 2752,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2830,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2843
+        },
+        {
+          "request": 6,
+          "inputTokens": 91,
+          "cacheReadTokens": 2816,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2907,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2920
+        },
+        {
+          "request": 7,
+          "inputTokens": 104,
+          "cacheReadTokens": 2880,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2984,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2997
+        },
+        {
+          "request": 8,
+          "inputTokens": 117,
+          "cacheReadTokens": 2944,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3061,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3074
+        },
+        {
+          "request": 9,
+          "inputTokens": 130,
+          "cacheReadTokens": 3008,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3138,
+          "outputTokens": 10,
+          "totalTokensProcessed": 3148
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 2,
+      "repeats": 8,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 18883,
+      "cacheReadTokens": 69312,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 88195,
+      "outputTokens": 128,
+      "totalTokensProcessed": 88323,
+      "assistantRequests": 10,
+      "wallSeconds": 58.2,
+      "readCalls": 9,
+      "sameReadArguments": false,
+      "protocolCompliant": false,
+      "expectedAnswer": "TOKEN-557579D9EE",
+      "answer": "TOKEN-557579D9EE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 832,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 832,
+          "outputTokens": 13,
+          "totalTokensProcessed": 845
+        },
+        {
+          "request": 2,
+          "inputTokens": 1839,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2607,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2620
+        },
+        {
+          "request": 3,
+          "inputTokens": 3550,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4382,
+          "outputTokens": 13,
+          "totalTokensProcessed": 4395
+        },
+        {
+          "request": 4,
+          "inputTokens": 1805,
+          "cacheReadTokens": 4352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6157,
+          "outputTokens": 13,
+          "totalTokensProcessed": 6170
+        },
+        {
+          "request": 5,
+          "inputTokens": 1788,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7932,
+          "outputTokens": 13,
+          "totalTokensProcessed": 7945
+        },
+        {
+          "request": 6,
+          "inputTokens": 1835,
+          "cacheReadTokens": 7872,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 9707,
+          "outputTokens": 13,
+          "totalTokensProcessed": 9720
+        },
+        {
+          "request": 7,
+          "inputTokens": 1818,
+          "cacheReadTokens": 9664,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 11482,
+          "outputTokens": 13,
+          "totalTokensProcessed": 11495
+        },
+        {
+          "request": 8,
+          "inputTokens": 1801,
+          "cacheReadTokens": 11456,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 13257,
+          "outputTokens": 13,
+          "totalTokensProcessed": 13270
+        },
+        {
+          "request": 9,
+          "inputTokens": 1784,
+          "cacheReadTokens": 13248,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 15032,
+          "outputTokens": 13,
+          "totalTokensProcessed": 15045
+        },
+        {
+          "request": 10,
+          "inputTokens": 1831,
+          "cacheReadTokens": 14976,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 16807,
+          "outputTokens": 11,
+          "totalTokensProcessed": 16818
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 2,
+      "repeats": 8,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 4208,
+      "cacheReadTokens": 19584,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 23792,
+      "outputTokens": 119,
+      "totalTokensProcessed": 23911,
+      "assistantRequests": 9,
+      "wallSeconds": 50.564,
+      "readCalls": 8,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-557579D9EE",
+      "answer": "TOKEN-557579D9EE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 28,
+      "estimatedTokensSuppressed": 25652,
+      "suppressedCharacters": 102620,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 832,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 832,
+          "outputTokens": 17,
+          "totalTokensProcessed": 849
+        },
+        {
+          "request": 2,
+          "inputTokens": 2611,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2611,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2624
+        },
+        {
+          "request": 3,
+          "inputTokens": 125,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2685,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2698
+        },
+        {
+          "request": 4,
+          "inputTokens": 135,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2759,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2772
+        },
+        {
+          "request": 5,
+          "inputTokens": 81,
+          "cacheReadTokens": 2752,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2833,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2846
+        },
+        {
+          "request": 6,
+          "inputTokens": 91,
+          "cacheReadTokens": 2816,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2907,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2920
+        },
+        {
+          "request": 7,
+          "inputTokens": 101,
+          "cacheReadTokens": 2880,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2981,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2994
+        },
+        {
+          "request": 8,
+          "inputTokens": 111,
+          "cacheReadTokens": 2944,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3055,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3068
+        },
+        {
+          "request": 9,
+          "inputTokens": 121,
+          "cacheReadTokens": 3008,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3129,
+          "outputTokens": 11,
+          "totalTokensProcessed": 3140
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 3,
+      "repeats": 8,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 17011,
+      "cacheReadTokens": 71040,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 88051,
+      "outputTokens": 137,
+      "totalTokensProcessed": 88188,
+      "assistantRequests": 10,
+      "wallSeconds": 57.201,
+      "readCalls": 9,
+      "sameReadArguments": false,
+      "protocolCompliant": false,
+      "expectedAnswer": "TOKEN-3B07579EDE",
+      "answer": "TOKEN-3B07579EDE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 832,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 832,
+          "outputTokens": 22,
+          "totalTokensProcessed": 854
+        },
+        {
+          "request": 2,
+          "inputTokens": 1779,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2611,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2624
+        },
+        {
+          "request": 3,
+          "inputTokens": 1821,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4381,
+          "outputTokens": 13,
+          "totalTokensProcessed": 4394
+        },
+        {
+          "request": 4,
+          "inputTokens": 1799,
+          "cacheReadTokens": 4352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6151,
+          "outputTokens": 13,
+          "totalTokensProcessed": 6164
+        },
+        {
+          "request": 5,
+          "inputTokens": 1777,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7921,
+          "outputTokens": 13,
+          "totalTokensProcessed": 7934
+        },
+        {
+          "request": 6,
+          "inputTokens": 1819,
+          "cacheReadTokens": 7872,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 9691,
+          "outputTokens": 13,
+          "totalTokensProcessed": 9704
+        },
+        {
+          "request": 7,
+          "inputTokens": 1797,
+          "cacheReadTokens": 9664,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 11461,
+          "outputTokens": 13,
+          "totalTokensProcessed": 11474
+        },
+        {
+          "request": 8,
+          "inputTokens": 1775,
+          "cacheReadTokens": 11456,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 13231,
+          "outputTokens": 13,
+          "totalTokensProcessed": 13244
+        },
+        {
+          "request": 9,
+          "inputTokens": 1817,
+          "cacheReadTokens": 13184,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 15001,
+          "outputTokens": 13,
+          "totalTokensProcessed": 15014
+        },
+        {
+          "request": 10,
+          "inputTokens": 1795,
+          "cacheReadTokens": 14976,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 16771,
+          "outputTokens": 11,
+          "totalTokensProcessed": 16782
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 3,
+      "repeats": 8,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 3478,
+      "cacheReadTokens": 23616,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 27094,
+      "outputTokens": 132,
+      "totalTokensProcessed": 27226,
+      "assistantRequests": 10,
+      "wallSeconds": 49.114,
+      "readCalls": 9,
+      "sameReadArguments": false,
+      "protocolCompliant": false,
+      "expectedAnswer": "TOKEN-3B07579EDE",
+      "answer": "TOKEN-3B07579EDE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 36,
+      "estimatedTokensSuppressed": 32982,
+      "suppressedCharacters": 131940,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 832,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 832,
+          "outputTokens": 17,
+          "totalTokensProcessed": 849
+        },
+        {
+          "request": 2,
+          "inputTokens": 1774,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2606,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2619
+        },
+        {
+          "request": 3,
+          "inputTokens": 124,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2684,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2697
+        },
+        {
+          "request": 4,
+          "inputTokens": 138,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2762,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2775
+        },
+        {
+          "request": 5,
+          "inputTokens": 88,
+          "cacheReadTokens": 2752,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2840,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2853
+        },
+        {
+          "request": 6,
+          "inputTokens": 102,
+          "cacheReadTokens": 2816,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2918,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2931
+        },
+        {
+          "request": 7,
+          "inputTokens": 116,
+          "cacheReadTokens": 2880,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2996,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3009
+        },
+        {
+          "request": 8,
+          "inputTokens": 130,
+          "cacheReadTokens": 2944,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3074,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3087
+        },
+        {
+          "request": 9,
+          "inputTokens": 80,
+          "cacheReadTokens": 3072,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3152,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3165
+        },
+        {
+          "request": 10,
+          "inputTokens": 94,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3230,
+          "outputTokens": 11,
+          "totalTokensProcessed": 3241
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 1,
+      "repeats": 12,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 24289,
+      "cacheReadTokens": 148480,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 172769,
+      "outputTokens": 203,
+      "totalTokensProcessed": 172972,
+      "assistantRequests": 14,
+      "wallSeconds": 83.181,
+      "readCalls": 13,
+      "sameReadArguments": false,
+      "protocolCompliant": false,
+      "expectedAnswer": "TOKEN-27DB49E670",
+      "answer": "All 12 sequential reads complete. Row R053:\n\nTOKEN-27DB49E670",
+      "answerCorrect": false,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 831,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 831,
+          "outputTokens": 25,
+          "totalTokensProcessed": 856
+        },
+        {
+          "request": 2,
+          "inputTokens": 1844,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2612,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2625
+        },
+        {
+          "request": 3,
+          "inputTokens": 1821,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4381,
+          "outputTokens": 13,
+          "totalTokensProcessed": 4394
+        },
+        {
+          "request": 4,
+          "inputTokens": 1798,
+          "cacheReadTokens": 4352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6150,
+          "outputTokens": 13,
+          "totalTokensProcessed": 6163
+        },
+        {
+          "request": 5,
+          "inputTokens": 1775,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7919,
+          "outputTokens": 13,
+          "totalTokensProcessed": 7932
+        },
+        {
+          "request": 6,
+          "inputTokens": 1816,
+          "cacheReadTokens": 7872,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 9688,
+          "outputTokens": 13,
+          "totalTokensProcessed": 9701
+        },
+        {
+          "request": 7,
+          "inputTokens": 1793,
+          "cacheReadTokens": 9664,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 11457,
+          "outputTokens": 13,
+          "totalTokensProcessed": 11470
+        },
+        {
+          "request": 8,
+          "inputTokens": 1770,
+          "cacheReadTokens": 11456,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 13226,
+          "outputTokens": 13,
+          "totalTokensProcessed": 13239
+        },
+        {
+          "request": 9,
+          "inputTokens": 1811,
+          "cacheReadTokens": 13184,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 14995,
+          "outputTokens": 13,
+          "totalTokensProcessed": 15008
+        },
+        {
+          "request": 10,
+          "inputTokens": 1788,
+          "cacheReadTokens": 14976,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 16764,
+          "outputTokens": 13,
+          "totalTokensProcessed": 16777
+        },
+        {
+          "request": 11,
+          "inputTokens": 1829,
+          "cacheReadTokens": 16704,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 18533,
+          "outputTokens": 13,
+          "totalTokensProcessed": 18546
+        },
+        {
+          "request": 12,
+          "inputTokens": 1806,
+          "cacheReadTokens": 18496,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 20302,
+          "outputTokens": 13,
+          "totalTokensProcessed": 20315
+        },
+        {
+          "request": 13,
+          "inputTokens": 1783,
+          "cacheReadTokens": 20288,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 22071,
+          "outputTokens": 13,
+          "totalTokensProcessed": 22084
+        },
+        {
+          "request": 14,
+          "inputTokens": 1824,
+          "cacheReadTokens": 22016,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 23840,
+          "outputTokens": 22,
+          "totalTokensProcessed": 23862
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 1,
+      "repeats": 12,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 4841,
+      "cacheReadTokens": 32320,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 37161,
+      "outputTokens": 170,
+      "totalTokensProcessed": 37331,
+      "assistantRequests": 13,
+      "wallSeconds": 73.612,
+      "readCalls": 12,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-27DB49E670",
+      "answer": "TOKEN-27DB49E670",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 66,
+      "estimatedTokensSuppressed": 60468,
+      "suppressedCharacters": 241890,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 63,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 831,
+          "outputTokens": 17,
+          "totalTokensProcessed": 848
+        },
+        {
+          "request": 2,
+          "inputTokens": 1836,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2604,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2617
+        },
+        {
+          "request": 3,
+          "inputTokens": 1849,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2681,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2694
+        },
+        {
+          "request": 4,
+          "inputTokens": 134,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2758,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2771
+        },
+        {
+          "request": 5,
+          "inputTokens": 83,
+          "cacheReadTokens": 2752,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2835,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2848
+        },
+        {
+          "request": 6,
+          "inputTokens": 96,
+          "cacheReadTokens": 2816,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2912,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2925
+        },
+        {
+          "request": 7,
+          "inputTokens": 109,
+          "cacheReadTokens": 2880,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2989,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3002
+        },
+        {
+          "request": 8,
+          "inputTokens": 122,
+          "cacheReadTokens": 2944,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3066,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3079
+        },
+        {
+          "request": 9,
+          "inputTokens": 135,
+          "cacheReadTokens": 3008,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3143,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3156
+        },
+        {
+          "request": 10,
+          "inputTokens": 84,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3220,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3233
+        },
+        {
+          "request": 11,
+          "inputTokens": 97,
+          "cacheReadTokens": 3200,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3297,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3310
+        },
+        {
+          "request": 12,
+          "inputTokens": 110,
+          "cacheReadTokens": 3264,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3374,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3387
+        },
+        {
+          "request": 13,
+          "inputTokens": 123,
+          "cacheReadTokens": 3328,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3451,
+          "outputTokens": 10,
+          "totalTokensProcessed": 3461
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 2,
+      "repeats": 12,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 25296,
+      "cacheReadTokens": 148032,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 173328,
+      "outputTokens": 193,
+      "totalTokensProcessed": 173521,
+      "assistantRequests": 14,
+      "wallSeconds": 69.109,
+      "readCalls": 13,
+      "sameReadArguments": false,
+      "protocolCompliant": false,
+      "expectedAnswer": "TOKEN-557579D9EE",
+      "answer": "TOKEN-557579D9EE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 63,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 831,
+          "outputTokens": 26,
+          "totalTokensProcessed": 857
+        },
+        {
+          "request": 2,
+          "inputTokens": 1851,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2619,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2632
+        },
+        {
+          "request": 3,
+          "inputTokens": 3562,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4394,
+          "outputTokens": 13,
+          "totalTokensProcessed": 4407
+        },
+        {
+          "request": 4,
+          "inputTokens": 1817,
+          "cacheReadTokens": 4352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6169,
+          "outputTokens": 13,
+          "totalTokensProcessed": 6182
+        },
+        {
+          "request": 5,
+          "inputTokens": 1800,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7944,
+          "outputTokens": 13,
+          "totalTokensProcessed": 7957
+        },
+        {
+          "request": 6,
+          "inputTokens": 1783,
+          "cacheReadTokens": 7936,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 9719,
+          "outputTokens": 13,
+          "totalTokensProcessed": 9732
+        },
+        {
+          "request": 7,
+          "inputTokens": 1830,
+          "cacheReadTokens": 9664,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 11494,
+          "outputTokens": 13,
+          "totalTokensProcessed": 11507
+        },
+        {
+          "request": 8,
+          "inputTokens": 1813,
+          "cacheReadTokens": 11456,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 13269,
+          "outputTokens": 13,
+          "totalTokensProcessed": 13282
+        },
+        {
+          "request": 9,
+          "inputTokens": 1796,
+          "cacheReadTokens": 13248,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 15044,
+          "outputTokens": 13,
+          "totalTokensProcessed": 15057
+        },
+        {
+          "request": 10,
+          "inputTokens": 1779,
+          "cacheReadTokens": 15040,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 16819,
+          "outputTokens": 13,
+          "totalTokensProcessed": 16832
+        },
+        {
+          "request": 11,
+          "inputTokens": 1826,
+          "cacheReadTokens": 16768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 18594,
+          "outputTokens": 13,
+          "totalTokensProcessed": 18607
+        },
+        {
+          "request": 12,
+          "inputTokens": 1809,
+          "cacheReadTokens": 18560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 20369,
+          "outputTokens": 13,
+          "totalTokensProcessed": 20382
+        },
+        {
+          "request": 13,
+          "inputTokens": 1792,
+          "cacheReadTokens": 20352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 22144,
+          "outputTokens": 13,
+          "totalTokensProcessed": 22157
+        },
+        {
+          "request": 14,
+          "inputTokens": 1775,
+          "cacheReadTokens": 22144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 23919,
+          "outputTokens": 11,
+          "totalTokensProcessed": 23930
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 2,
+      "repeats": 12,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 3789,
+      "cacheReadTokens": 33408,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 37197,
+      "outputTokens": 190,
+      "totalTokensProcessed": 37387,
+      "assistantRequests": 13,
+      "wallSeconds": 72.241,
+      "readCalls": 12,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-557579D9EE",
+      "answer": "TOKEN-557579D9EE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 66,
+      "estimatedTokensSuppressed": 60468,
+      "suppressedCharacters": 241890,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 831,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 831,
+          "outputTokens": 36,
+          "totalTokensProcessed": 867
+        },
+        {
+          "request": 2,
+          "inputTokens": 1861,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2629,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2642
+        },
+        {
+          "request": 3,
+          "inputTokens": 78,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2702,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2715
+        },
+        {
+          "request": 4,
+          "inputTokens": 87,
+          "cacheReadTokens": 2688,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2775,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2788
+        },
+        {
+          "request": 5,
+          "inputTokens": 96,
+          "cacheReadTokens": 2752,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2848,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2861
+        },
+        {
+          "request": 6,
+          "inputTokens": 105,
+          "cacheReadTokens": 2816,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2921,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2934
+        },
+        {
+          "request": 7,
+          "inputTokens": 114,
+          "cacheReadTokens": 2880,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2994,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3007
+        },
+        {
+          "request": 8,
+          "inputTokens": 123,
+          "cacheReadTokens": 2944,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3067,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3080
+        },
+        {
+          "request": 9,
+          "inputTokens": 132,
+          "cacheReadTokens": 3008,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3140,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3153
+        },
+        {
+          "request": 10,
+          "inputTokens": 77,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3213,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3226
+        },
+        {
+          "request": 11,
+          "inputTokens": 86,
+          "cacheReadTokens": 3200,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3286,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3299
+        },
+        {
+          "request": 12,
+          "inputTokens": 95,
+          "cacheReadTokens": 3264,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3359,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3372
+        },
+        {
+          "request": 13,
+          "inputTokens": 104,
+          "cacheReadTokens": 3328,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3432,
+          "outputTokens": 11,
+          "totalTokensProcessed": 3443
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 3,
+      "repeats": 12,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 26122,
+      "cacheReadTokens": 172416,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 198538,
+      "outputTokens": 210,
+      "totalTokensProcessed": 198748,
+      "assistantRequests": 15,
+      "wallSeconds": 89.984,
+      "readCalls": 14,
+      "sameReadArguments": false,
+      "protocolCompliant": false,
+      "expectedAnswer": "TOKEN-3B07579EDE",
+      "answer": "TOKEN-3B07579EDE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 830,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 830,
+          "outputTokens": 30,
+          "totalTokensProcessed": 860
+        },
+        {
+          "request": 2,
+          "inputTokens": 1849,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2617,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2630
+        },
+        {
+          "request": 3,
+          "inputTokens": 1827,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4387,
+          "outputTokens": 13,
+          "totalTokensProcessed": 4400
+        },
+        {
+          "request": 4,
+          "inputTokens": 1805,
+          "cacheReadTokens": 4352,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6157,
+          "outputTokens": 13,
+          "totalTokensProcessed": 6170
+        },
+        {
+          "request": 5,
+          "inputTokens": 1783,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7927,
+          "outputTokens": 13,
+          "totalTokensProcessed": 7940
+        },
+        {
+          "request": 6,
+          "inputTokens": 1825,
+          "cacheReadTokens": 7872,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 9697,
+          "outputTokens": 13,
+          "totalTokensProcessed": 9710
+        },
+        {
+          "request": 7,
+          "inputTokens": 1803,
+          "cacheReadTokens": 9664,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 11467,
+          "outputTokens": 13,
+          "totalTokensProcessed": 11480
+        },
+        {
+          "request": 8,
+          "inputTokens": 1781,
+          "cacheReadTokens": 11456,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 13237,
+          "outputTokens": 13,
+          "totalTokensProcessed": 13250
+        },
+        {
+          "request": 9,
+          "inputTokens": 1823,
+          "cacheReadTokens": 13184,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 15007,
+          "outputTokens": 13,
+          "totalTokensProcessed": 15020
+        },
+        {
+          "request": 10,
+          "inputTokens": 1801,
+          "cacheReadTokens": 14976,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 16777,
+          "outputTokens": 13,
+          "totalTokensProcessed": 16790
+        },
+        {
+          "request": 11,
+          "inputTokens": 1779,
+          "cacheReadTokens": 16768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 18547,
+          "outputTokens": 13,
+          "totalTokensProcessed": 18560
+        },
+        {
+          "request": 12,
+          "inputTokens": 1821,
+          "cacheReadTokens": 18496,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 20317,
+          "outputTokens": 13,
+          "totalTokensProcessed": 20330
+        },
+        {
+          "request": 13,
+          "inputTokens": 1799,
+          "cacheReadTokens": 20288,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 22087,
+          "outputTokens": 13,
+          "totalTokensProcessed": 22100
+        },
+        {
+          "request": 14,
+          "inputTokens": 1777,
+          "cacheReadTokens": 22080,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 23857,
+          "outputTokens": 13,
+          "totalTokensProcessed": 23870
+        },
+        {
+          "request": 15,
+          "inputTokens": 1819,
+          "cacheReadTokens": 23808,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 25627,
+          "outputTokens": 11,
+          "totalTokensProcessed": 25638
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 3,
+      "repeats": 12,
+      "rowCount": 72,
+      "targetRow": 53,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "inputTokens": 3056,
+      "cacheReadTokens": 33792,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 36848,
+      "outputTokens": 167,
+      "totalTokensProcessed": 37015,
+      "assistantRequests": 13,
+      "wallSeconds": 66.635,
+      "readCalls": 12,
+      "sameReadArguments": true,
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-3B07579EDE",
+      "answer": "TOKEN-3B07579EDE",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 66,
+      "estimatedTokensSuppressed": 60468,
+      "suppressedCharacters": 241890,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 62,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 830,
+          "outputTokens": 13,
+          "totalTokensProcessed": 843
+        },
+        {
+          "request": 2,
+          "inputTokens": 1832,
+          "cacheReadTokens": 768,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2600,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2613
+        },
+        {
+          "request": 3,
+          "inputTokens": 113,
+          "cacheReadTokens": 2560,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2673,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2686
+        },
+        {
+          "request": 4,
+          "inputTokens": 122,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2746,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2759
+        },
+        {
+          "request": 5,
+          "inputTokens": 131,
+          "cacheReadTokens": 2688,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2819,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2832
+        },
+        {
+          "request": 6,
+          "inputTokens": 76,
+          "cacheReadTokens": 2816,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2892,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2905
+        },
+        {
+          "request": 7,
+          "inputTokens": 85,
+          "cacheReadTokens": 2880,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2965,
+          "outputTokens": 13,
+          "totalTokensProcessed": 2978
+        },
+        {
+          "request": 8,
+          "inputTokens": 94,
+          "cacheReadTokens": 2944,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3038,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3051
+        },
+        {
+          "request": 9,
+          "inputTokens": 103,
+          "cacheReadTokens": 3008,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3111,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3124
+        },
+        {
+          "request": 10,
+          "inputTokens": 112,
+          "cacheReadTokens": 3072,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3184,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3197
+        },
+        {
+          "request": 11,
+          "inputTokens": 121,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3257,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3270
+        },
+        {
+          "request": 12,
+          "inputTokens": 130,
+          "cacheReadTokens": 3200,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3330,
+          "outputTokens": 13,
+          "totalTokensProcessed": 3343
+        },
+        {
+          "request": 13,
+          "inputTokens": 75,
+          "cacheReadTokens": 3328,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3403,
+          "outputTokens": 11,
+          "totalTokensProcessed": 3414
+        }
+      ]
+    }
+  ]
+}

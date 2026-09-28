@@ -284,6 +284,8 @@ def make_validation_report(report: dict, rows: list[dict]) -> None:
         "",
         "![Total model token traffic](../assets/total-token-traffic.png)",
         "",
+        "长会话扩展实验见 [`long-session-validation.md`](long-session-validation.md)，其中包含 4、8、12 次连续读取的累计 token 轨迹。",
+        "",
         "## 限制",
         "",
         "1. 这是 Pi 0.87.1 上一个受控的重复读取任务，不代表真实编程任务中的平均节省比例。",
