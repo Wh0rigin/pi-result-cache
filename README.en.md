@@ -62,6 +62,17 @@ See the [full long-session validation report](docs/long-session-validation.md) f
 
 Across three paired seeds, the mean prompt-token reduction grew with session length: 46.7% at 4 reads, 71.7% at 8 reads, and 79.6% at 12 reads. At 12 reads, baseline exact-answer accuracy was 2/3 versus 3/3 with deduplication; strict read-protocol adherence was 0/3 versus 3/3. See the report for the detailed data and limitations.
 
+The distant-query experiment inserts 0, 6, or 12 distinct filler reads between two reads of the same target file:
+
+```bash
+npm run benchmark:distance
+npm run charts:distance
+```
+
+It measures the effect when the repeated query is far apart in the conversation while the earlier result may still be retained in context. See the [full distant-query validation report](docs/distant-query-validation.md) for all charts.
+
+Across three paired seeds per condition, mean prompt-token reduction was 21.5%, 4.4%, and 2.3% with 0, 6, and 12 filler reads. Both arms achieved 3/3 exact answers and 3/3 complete read sequences at every gap. As the gap grows, filler content dominates the prompt, so the fixed repeated target result represents a smaller share of total usage.
+
 Override the model or number of paired runs:
 
 ```powershell

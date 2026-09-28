@@ -285,6 +285,7 @@ def make_validation_report(report: dict, rows: list[dict]) -> None:
         "![Total model token traffic](../assets/total-token-traffic.png)",
         "",
         "长会话扩展实验见 [`long-session-validation.md`](long-session-validation.md)，其中包含 4、8、12 次连续读取的累计 token 轨迹。",
+        "两次相同查询之间插入多轮内容的实验见 [`distant-query-validation.md`](distant-query-validation.md)，用于观察上下文距离变远时的效果。",
         "",
         "## 限制",
         "",

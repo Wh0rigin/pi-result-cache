@@ -1,0 +1,2354 @@
+{
+  "generatedAt": "2026-09-28T11:54:56.758Z",
+  "model": "cc-switch-packy-code/glm-5.3-flash",
+  "piVersion": "0.87.1",
+  "repetitionsPerCondition": 3,
+  "gaps": [
+    0,
+    6,
+    12
+  ],
+  "fixture": {
+    "targetRows": 72,
+    "targetRow": 53,
+    "fillerRows": 18
+  },
+  "task": "Read target.txt, read distinct filler files during an intervening gap, then read target.txt again and return its target token.",
+  "arms": [
+    "baseline (extension disabled)",
+    "dedupe (request-local context deduplication)"
+  ],
+  "results": [
+    {
+      "arm": "baseline",
+      "seed": 1,
+      "gap": 0,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 0,
+      "inputTokens": 4421,
+      "cacheReadTokens": 3456,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 7877,
+      "outputTokens": 52,
+      "totalTokensProcessed": 7929,
+      "assistantRequests": 3,
+      "wallSeconds": 17.477,
+      "readCalls": 2,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 0,
+      "actualReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-5D7DFE0862",
+      "answer": "TOKEN-5D7DFE0862",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 845,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 845,
+          "outputTokens": 28,
+          "totalTokensProcessed": 873
+        },
+        {
+          "request": 2,
+          "inputTokens": 1799,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2631,
+          "outputTokens": 12,
+          "totalTokensProcessed": 2643
+        },
+        {
+          "request": 3,
+          "inputTokens": 1777,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4401,
+          "outputTokens": 12,
+          "totalTokensProcessed": 4413
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 1,
+      "gap": 0,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 0,
+      "inputTokens": 1894,
+      "cacheReadTokens": 4288,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 6182,
+      "outputTokens": 51,
+      "totalTokensProcessed": 6233,
+      "assistantRequests": 4,
+      "wallSeconds": 29.155,
+      "readCalls": 2,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 0,
+      "actualReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-5D7DFE0862",
+      "answer": "TOKEN-5D7DFE0862",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 1,
+      "estimatedTokensSuppressed": 916,
+      "suppressedCharacters": 3665,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 0,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 0,
+          "outputTokens": 0,
+          "totalTokensProcessed": 0
+        },
+        {
+          "request": 2,
+          "inputTokens": 13,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 845,
+          "outputTokens": 27,
+          "totalTokensProcessed": 872
+        },
+        {
+          "request": 3,
+          "inputTokens": 1798,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2630,
+          "outputTokens": 12,
+          "totalTokensProcessed": 2642
+        },
+        {
+          "request": 4,
+          "inputTokens": 83,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2707,
+          "outputTokens": 12,
+          "totalTokensProcessed": 2719
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 2,
+      "gap": 0,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 0,
+      "inputTokens": 1790,
+      "cacheReadTokens": 6080,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 7870,
+      "outputTokens": 40,
+      "totalTokensProcessed": 7910,
+      "assistantRequests": 3,
+      "wallSeconds": 16.563,
+      "readCalls": 2,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 0,
+      "actualReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-ED15AA6C4C",
+      "answer": "TOKEN-ED15AA6C4C",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 14,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 846,
+          "outputTokens": 17,
+          "totalTokensProcessed": 863
+        },
+        {
+          "request": 2,
+          "inputTokens": 1,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2625,
+          "outputTokens": 12,
+          "totalTokensProcessed": 2637
+        },
+        {
+          "request": 3,
+          "inputTokens": 1775,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4399,
+          "outputTokens": 11,
+          "totalTokensProcessed": 4410
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 2,
+      "gap": 0,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 0,
+      "inputTokens": 2725,
+      "cacheReadTokens": 3456,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 6181,
+      "outputTokens": 49,
+      "totalTokensProcessed": 6230,
+      "assistantRequests": 3,
+      "wallSeconds": 35.553,
+      "readCalls": 2,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 0,
+      "actualReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-ED15AA6C4C",
+      "answer": "TOKEN-ED15AA6C4C",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 1,
+      "estimatedTokensSuppressed": 916,
+      "suppressedCharacters": 3665,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 846,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 846,
+          "outputTokens": 17,
+          "totalTokensProcessed": 863
+        },
+        {
+          "request": 2,
+          "inputTokens": 1793,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2625,
+          "outputTokens": 21,
+          "totalTokensProcessed": 2646
+        },
+        {
+          "request": 3,
+          "inputTokens": 86,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2710,
+          "outputTokens": 11,
+          "totalTokensProcessed": 2721
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 3,
+      "gap": 0,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 0,
+      "inputTokens": 4412,
+      "cacheReadTokens": 3456,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 7868,
+      "outputTokens": 48,
+      "totalTokensProcessed": 7916,
+      "assistantRequests": 3,
+      "wallSeconds": 16.333,
+      "readCalls": 2,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 0,
+      "actualReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-73BE1D7577",
+      "answer": "TOKEN-73BE1D7577",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 845,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 845,
+          "outputTokens": 25,
+          "totalTokensProcessed": 870
+        },
+        {
+          "request": 2,
+          "inputTokens": 1795,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2627,
+          "outputTokens": 12,
+          "totalTokensProcessed": 2639
+        },
+        {
+          "request": 3,
+          "inputTokens": 1772,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4396,
+          "outputTokens": 11,
+          "totalTokensProcessed": 4407
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 3,
+      "gap": 0,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 0,
+      "inputTokens": 1885,
+      "cacheReadTokens": 4288,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 6173,
+      "outputTokens": 48,
+      "totalTokensProcessed": 6221,
+      "assistantRequests": 3,
+      "wallSeconds": 13.363,
+      "readCalls": 2,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 0,
+      "actualReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-73BE1D7577",
+      "answer": "TOKEN-73BE1D7577",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 1,
+      "estimatedTokensSuppressed": 916,
+      "suppressedCharacters": 3665,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 13,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 845,
+          "outputTokens": 25,
+          "totalTokensProcessed": 870
+        },
+        {
+          "request": 2,
+          "inputTokens": 1795,
+          "cacheReadTokens": 832,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2627,
+          "outputTokens": 12,
+          "totalTokensProcessed": 2639
+        },
+        {
+          "request": 3,
+          "inputTokens": 77,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2701,
+          "outputTokens": 11,
+          "totalTokensProcessed": 2712
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 1,
+      "gap": 6,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 6,
+      "inputTokens": 7653,
+      "cacheReadTokens": 29568,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 37221,
+      "outputTokens": 130,
+      "totalTokensProcessed": 37351,
+      "assistantRequests": 9,
+      "wallSeconds": 42.606,
+      "readCalls": 8,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 6,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-5D7DFE0862",
+      "answer": "TOKEN-5D7DFE0862",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 905,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 905,
+          "outputTokens": 12,
+          "totalTokensProcessed": 917
+        },
+        {
+          "request": 2,
+          "inputTokens": 1779,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2675,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2690
+        },
+        {
+          "request": 3,
+          "inputTokens": 531,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3155,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3170
+        },
+        {
+          "request": 4,
+          "inputTokens": 497,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3633,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3649
+        },
+        {
+          "request": 5,
+          "inputTokens": 546,
+          "cacheReadTokens": 3584,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4130,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4146
+        },
+        {
+          "request": 6,
+          "inputTokens": 529,
+          "cacheReadTokens": 4096,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4625,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4641
+        },
+        {
+          "request": 7,
+          "inputTokens": 508,
+          "cacheReadTokens": 4608,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5116,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5132
+        },
+        {
+          "request": 8,
+          "inputTokens": 550,
+          "cacheReadTokens": 5056,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5606,
+          "outputTokens": 12,
+          "totalTokensProcessed": 5618
+        },
+        {
+          "request": 9,
+          "inputTokens": 1808,
+          "cacheReadTokens": 5568,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7376,
+          "outputTokens": 12,
+          "totalTokensProcessed": 7388
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 1,
+      "gap": 6,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 6,
+      "inputTokens": 4989,
+      "cacheReadTokens": 30656,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 35645,
+      "outputTokens": 145,
+      "totalTokensProcessed": 35790,
+      "assistantRequests": 9,
+      "wallSeconds": 45.879,
+      "readCalls": 8,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 6,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-5D7DFE0862",
+      "answer": "TOKEN-5D7DFE0862",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 1,
+      "estimatedTokensSuppressed": 916,
+      "suppressedCharacters": 3665,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 9,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 905,
+          "outputTokens": 27,
+          "totalTokensProcessed": 932
+        },
+        {
+          "request": 2,
+          "inputTokens": 1794,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2690,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2705
+        },
+        {
+          "request": 3,
+          "inputTokens": 482,
+          "cacheReadTokens": 2688,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3170,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3185
+        },
+        {
+          "request": 4,
+          "inputTokens": 512,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3648,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3664
+        },
+        {
+          "request": 5,
+          "inputTokens": 497,
+          "cacheReadTokens": 3648,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4145,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4161
+        },
+        {
+          "request": 6,
+          "inputTokens": 544,
+          "cacheReadTokens": 4096,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4640,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4656
+        },
+        {
+          "request": 7,
+          "inputTokens": 523,
+          "cacheReadTokens": 4608,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5131,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5147
+        },
+        {
+          "request": 8,
+          "inputTokens": 501,
+          "cacheReadTokens": 5120,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5621,
+          "outputTokens": 12,
+          "totalTokensProcessed": 5633
+        },
+        {
+          "request": 9,
+          "inputTokens": 127,
+          "cacheReadTokens": 5568,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5695,
+          "outputTokens": 12,
+          "totalTokensProcessed": 5707
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 2,
+      "gap": 6,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 6,
+      "inputTokens": 2078,
+      "cacheReadTokens": 35136,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 37214,
+      "outputTokens": 129,
+      "totalTokensProcessed": 37343,
+      "assistantRequests": 9,
+      "wallSeconds": 44.054,
+      "readCalls": 8,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 6,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-ED15AA6C4C",
+      "answer": "TOKEN-ED15AA6C4C",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 8,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 904,
+          "outputTokens": 12,
+          "totalTokensProcessed": 916
+        },
+        {
+          "request": 2,
+          "inputTokens": 54,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2678,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2693
+        },
+        {
+          "request": 3,
+          "inputTokens": 12,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3148,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3163
+        },
+        {
+          "request": 4,
+          "inputTokens": 44,
+          "cacheReadTokens": 3584,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3628,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3644
+        },
+        {
+          "request": 5,
+          "inputTokens": 25,
+          "cacheReadTokens": 4096,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4121,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4137
+        },
+        {
+          "request": 6,
+          "inputTokens": 14,
+          "cacheReadTokens": 4608,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4622,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4638
+        },
+        {
+          "request": 7,
+          "inputTokens": 53,
+          "cacheReadTokens": 5056,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5109,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5125
+        },
+        {
+          "request": 8,
+          "inputTokens": 47,
+          "cacheReadTokens": 5568,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5615,
+          "outputTokens": 12,
+          "totalTokensProcessed": 5627
+        },
+        {
+          "request": 9,
+          "inputTokens": 1821,
+          "cacheReadTokens": 5568,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7389,
+          "outputTokens": 11,
+          "totalTokensProcessed": 7400
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 2,
+      "gap": 6,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 6,
+      "inputTokens": 5946,
+      "cacheReadTokens": 29568,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 35514,
+      "outputTokens": 129,
+      "totalTokensProcessed": 35643,
+      "assistantRequests": 9,
+      "wallSeconds": 47.177,
+      "readCalls": 8,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 6,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-ED15AA6C4C",
+      "answer": "TOKEN-ED15AA6C4C",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 1,
+      "estimatedTokensSuppressed": 916,
+      "suppressedCharacters": 3665,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 904,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 904,
+          "outputTokens": 12,
+          "totalTokensProcessed": 916
+        },
+        {
+          "request": 2,
+          "inputTokens": 1782,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2678,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2693
+        },
+        {
+          "request": 3,
+          "inputTokens": 524,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3148,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3163
+        },
+        {
+          "request": 4,
+          "inputTokens": 492,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3628,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3644
+        },
+        {
+          "request": 5,
+          "inputTokens": 537,
+          "cacheReadTokens": 3584,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4121,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4137
+        },
+        {
+          "request": 6,
+          "inputTokens": 526,
+          "cacheReadTokens": 4096,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4622,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4638
+        },
+        {
+          "request": 7,
+          "inputTokens": 501,
+          "cacheReadTokens": 4608,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5109,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5125
+        },
+        {
+          "request": 8,
+          "inputTokens": 559,
+          "cacheReadTokens": 5056,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5615,
+          "outputTokens": 12,
+          "totalTokensProcessed": 5627
+        },
+        {
+          "request": 9,
+          "inputTokens": 121,
+          "cacheReadTokens": 5568,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5689,
+          "outputTokens": 11,
+          "totalTokensProcessed": 5700
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 3,
+      "gap": 6,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 6,
+      "inputTokens": 13263,
+      "cacheReadTokens": 24128,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 37391,
+      "outputTokens": 133,
+      "totalTokensProcessed": 37524,
+      "assistantRequests": 9,
+      "wallSeconds": 49.567,
+      "readCalls": 8,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 6,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-73BE1D7577",
+      "answer": "TOKEN-73BE1D7577",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 905,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 905,
+          "outputTokens": 16,
+          "totalTokensProcessed": 921
+        },
+        {
+          "request": 2,
+          "inputTokens": 1782,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2678,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2693
+        },
+        {
+          "request": 3,
+          "inputTokens": 540,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3164,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3179
+        },
+        {
+          "request": 4,
+          "inputTokens": 513,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3649,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3665
+        },
+        {
+          "request": 5,
+          "inputTokens": 503,
+          "cacheReadTokens": 3648,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4151,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4167
+        },
+        {
+          "request": 6,
+          "inputTokens": 554,
+          "cacheReadTokens": 4096,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4650,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4666
+        },
+        {
+          "request": 7,
+          "inputTokens": 5145,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5145,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5161
+        },
+        {
+          "request": 8,
+          "inputTokens": 1032,
+          "cacheReadTokens": 4608,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5640,
+          "outputTokens": 12,
+          "totalTokensProcessed": 5652
+        },
+        {
+          "request": 9,
+          "inputTokens": 2289,
+          "cacheReadTokens": 5120,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7409,
+          "outputTokens": 11,
+          "totalTokensProcessed": 7420
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 3,
+      "gap": 6,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 6,
+      "inputTokens": 9180,
+      "cacheReadTokens": 26560,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 35740,
+      "outputTokens": 138,
+      "totalTokensProcessed": 35878,
+      "assistantRequests": 9,
+      "wallSeconds": 43.497,
+      "readCalls": 8,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 6,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-73BE1D7577",
+      "answer": "TOKEN-73BE1D7577",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 1,
+      "estimatedTokensSuppressed": 916,
+      "suppressedCharacters": 3665,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 905,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 905,
+          "outputTokens": 21,
+          "totalTokensProcessed": 926
+        },
+        {
+          "request": 2,
+          "inputTokens": 1787,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2683,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2698
+        },
+        {
+          "request": 3,
+          "inputTokens": 2273,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3169,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3184
+        },
+        {
+          "request": 4,
+          "inputTokens": 1030,
+          "cacheReadTokens": 2624,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3654,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3670
+        },
+        {
+          "request": 5,
+          "inputTokens": 508,
+          "cacheReadTokens": 3648,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4156,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4172
+        },
+        {
+          "request": 6,
+          "inputTokens": 1519,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4655,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4671
+        },
+        {
+          "request": 7,
+          "inputTokens": 542,
+          "cacheReadTokens": 4608,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5150,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5166
+        },
+        {
+          "request": 8,
+          "inputTokens": 525,
+          "cacheReadTokens": 5120,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5645,
+          "outputTokens": 12,
+          "totalTokensProcessed": 5657
+        },
+        {
+          "request": 9,
+          "inputTokens": 91,
+          "cacheReadTokens": 5632,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5723,
+          "outputTokens": 11,
+          "totalTokensProcessed": 5734
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 1,
+      "gap": 12,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 12,
+      "inputTokens": 19332,
+      "cacheReadTokens": 65600,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 84932,
+      "outputTokens": 243,
+      "totalTokensProcessed": 85175,
+      "assistantRequests": 15,
+      "wallSeconds": 83.324,
+      "readCalls": 14,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 12,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-5D7DFE0862",
+      "answer": "TOKEN-5D7DFE0862",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 938,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 938,
+          "outputTokens": 31,
+          "totalTokensProcessed": 969
+        },
+        {
+          "request": 2,
+          "inputTokens": 1831,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2727,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2742
+        },
+        {
+          "request": 3,
+          "inputTokens": 519,
+          "cacheReadTokens": 2688,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3207,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3222
+        },
+        {
+          "request": 4,
+          "inputTokens": 485,
+          "cacheReadTokens": 3200,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3685,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3701
+        },
+        {
+          "request": 5,
+          "inputTokens": 534,
+          "cacheReadTokens": 3648,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4182,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4198
+        },
+        {
+          "request": 6,
+          "inputTokens": 517,
+          "cacheReadTokens": 4160,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4677,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4693
+        },
+        {
+          "request": 7,
+          "inputTokens": 5168,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5168,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5184
+        },
+        {
+          "request": 8,
+          "inputTokens": 538,
+          "cacheReadTokens": 5120,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5658,
+          "outputTokens": 15,
+          "totalTokensProcessed": 5673
+        },
+        {
+          "request": 9,
+          "inputTokens": 514,
+          "cacheReadTokens": 5632,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6146,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6162
+        },
+        {
+          "request": 10,
+          "inputTokens": 496,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6640,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6656
+        },
+        {
+          "request": 11,
+          "inputTokens": 546,
+          "cacheReadTokens": 6592,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7138,
+          "outputTokens": 15,
+          "totalTokensProcessed": 7153
+        },
+        {
+          "request": 12,
+          "inputTokens": 2947,
+          "cacheReadTokens": 4672,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7619,
+          "outputTokens": 16,
+          "totalTokensProcessed": 7635
+        },
+        {
+          "request": 13,
+          "inputTokens": 1027,
+          "cacheReadTokens": 7104,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8131,
+          "outputTokens": 16,
+          "totalTokensProcessed": 8147
+        },
+        {
+          "request": 14,
+          "inputTokens": 1007,
+          "cacheReadTokens": 7616,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8623,
+          "outputTokens": 12,
+          "totalTokensProcessed": 8635
+        },
+        {
+          "request": 15,
+          "inputTokens": 2265,
+          "cacheReadTokens": 8128,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 10393,
+          "outputTokens": 12,
+          "totalTokensProcessed": 10405
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 1,
+      "gap": 12,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 12,
+      "inputTokens": 18143,
+      "cacheReadTokens": 65024,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 83167,
+      "outputTokens": 238,
+      "totalTokensProcessed": 83405,
+      "assistantRequests": 15,
+      "wallSeconds": 76.893,
+      "readCalls": 14,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 12,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-5D7DFE0862",
+      "answer": "TOKEN-5D7DFE0862",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 1,
+      "estimatedTokensSuppressed": 916,
+      "suppressedCharacters": 3665,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 42,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 938,
+          "outputTokens": 26,
+          "totalTokensProcessed": 964
+        },
+        {
+          "request": 2,
+          "inputTokens": 2722,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2722,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2737
+        },
+        {
+          "request": 3,
+          "inputTokens": 2306,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3202,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3217
+        },
+        {
+          "request": 4,
+          "inputTokens": 480,
+          "cacheReadTokens": 3200,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3680,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3696
+        },
+        {
+          "request": 5,
+          "inputTokens": 3281,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4177,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4193
+        },
+        {
+          "request": 6,
+          "inputTokens": 1024,
+          "cacheReadTokens": 3648,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4672,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4688
+        },
+        {
+          "request": 7,
+          "inputTokens": 491,
+          "cacheReadTokens": 4672,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5163,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5179
+        },
+        {
+          "request": 8,
+          "inputTokens": 533,
+          "cacheReadTokens": 5120,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5653,
+          "outputTokens": 15,
+          "totalTokensProcessed": 5668
+        },
+        {
+          "request": 9,
+          "inputTokens": 509,
+          "cacheReadTokens": 5632,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6141,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6157
+        },
+        {
+          "request": 10,
+          "inputTokens": 2475,
+          "cacheReadTokens": 4160,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6635,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6651
+        },
+        {
+          "request": 11,
+          "inputTokens": 541,
+          "cacheReadTokens": 6592,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7133,
+          "outputTokens": 15,
+          "totalTokensProcessed": 7148
+        },
+        {
+          "request": 12,
+          "inputTokens": 510,
+          "cacheReadTokens": 7104,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7614,
+          "outputTokens": 16,
+          "totalTokensProcessed": 7630
+        },
+        {
+          "request": 13,
+          "inputTokens": 2046,
+          "cacheReadTokens": 6080,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8126,
+          "outputTokens": 16,
+          "totalTokensProcessed": 8142
+        },
+        {
+          "request": 14,
+          "inputTokens": 1066,
+          "cacheReadTokens": 7552,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8618,
+          "outputTokens": 12,
+          "totalTokensProcessed": 8630
+        },
+        {
+          "request": 15,
+          "inputTokens": 117,
+          "cacheReadTokens": 8576,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8693,
+          "outputTokens": 12,
+          "totalTokensProcessed": 8705
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 2,
+      "gap": 12,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 12,
+      "inputTokens": 2266,
+      "cacheReadTokens": 82368,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 84634,
+      "outputTokens": 223,
+      "totalTokensProcessed": 84857,
+      "assistantRequests": 15,
+      "wallSeconds": 68.881,
+      "readCalls": 14,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 12,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-ED15AA6C4C",
+      "answer": "TOKEN-ED15AA6C4C",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 43,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 939,
+          "outputTokens": 12,
+          "totalTokensProcessed": 951
+        },
+        {
+          "request": 2,
+          "inputTokens": 25,
+          "cacheReadTokens": 2688,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2713,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2728
+        },
+        {
+          "request": 3,
+          "inputTokens": 47,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3183,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3198
+        },
+        {
+          "request": 4,
+          "inputTokens": 15,
+          "cacheReadTokens": 3648,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3663,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3679
+        },
+        {
+          "request": 5,
+          "inputTokens": 60,
+          "cacheReadTokens": 4096,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4156,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4172
+        },
+        {
+          "request": 6,
+          "inputTokens": 49,
+          "cacheReadTokens": 4608,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4657,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4673
+        },
+        {
+          "request": 7,
+          "inputTokens": 24,
+          "cacheReadTokens": 5120,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5144,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5160
+        },
+        {
+          "request": 8,
+          "inputTokens": 18,
+          "cacheReadTokens": 5632,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5650,
+          "outputTokens": 15,
+          "totalTokensProcessed": 5665
+        },
+        {
+          "request": 9,
+          "inputTokens": 41,
+          "cacheReadTokens": 6080,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6121,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6137
+        },
+        {
+          "request": 10,
+          "inputTokens": 33,
+          "cacheReadTokens": 6592,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6625,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6641
+        },
+        {
+          "request": 11,
+          "inputTokens": 22,
+          "cacheReadTokens": 7104,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7126,
+          "outputTokens": 15,
+          "totalTokensProcessed": 7141
+        },
+        {
+          "request": 12,
+          "inputTokens": 49,
+          "cacheReadTokens": 7552,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7601,
+          "outputTokens": 16,
+          "totalTokensProcessed": 7617
+        },
+        {
+          "request": 13,
+          "inputTokens": 32,
+          "cacheReadTokens": 8064,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8096,
+          "outputTokens": 16,
+          "totalTokensProcessed": 8112
+        },
+        {
+          "request": 14,
+          "inputTokens": 17,
+          "cacheReadTokens": 8576,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8593,
+          "outputTokens": 12,
+          "totalTokensProcessed": 8605
+        },
+        {
+          "request": 15,
+          "inputTokens": 1791,
+          "cacheReadTokens": 8576,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 10367,
+          "outputTokens": 11,
+          "totalTokensProcessed": 10378
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 2,
+      "gap": 12,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 12,
+      "inputTokens": 9143,
+      "cacheReadTokens": 73792,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 82935,
+      "outputTokens": 223,
+      "totalTokensProcessed": 83158,
+      "assistantRequests": 15,
+      "wallSeconds": 70.312,
+      "readCalls": 14,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 12,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-ED15AA6C4C",
+      "answer": "TOKEN-ED15AA6C4C",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 1,
+      "estimatedTokensSuppressed": 916,
+      "suppressedCharacters": 3665,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 939,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 939,
+          "outputTokens": 12,
+          "totalTokensProcessed": 951
+        },
+        {
+          "request": 2,
+          "inputTokens": 1817,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2713,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2728
+        },
+        {
+          "request": 3,
+          "inputTokens": 495,
+          "cacheReadTokens": 2688,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3183,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3198
+        },
+        {
+          "request": 4,
+          "inputTokens": 527,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3663,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3679
+        },
+        {
+          "request": 5,
+          "inputTokens": 508,
+          "cacheReadTokens": 3648,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4156,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4172
+        },
+        {
+          "request": 6,
+          "inputTokens": 561,
+          "cacheReadTokens": 4096,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4657,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4673
+        },
+        {
+          "request": 7,
+          "inputTokens": 536,
+          "cacheReadTokens": 4608,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5144,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5160
+        },
+        {
+          "request": 8,
+          "inputTokens": 530,
+          "cacheReadTokens": 5120,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5650,
+          "outputTokens": 15,
+          "totalTokensProcessed": 5665
+        },
+        {
+          "request": 9,
+          "inputTokens": 489,
+          "cacheReadTokens": 5632,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6121,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6137
+        },
+        {
+          "request": 10,
+          "inputTokens": 545,
+          "cacheReadTokens": 6080,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6625,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6641
+        },
+        {
+          "request": 11,
+          "inputTokens": 534,
+          "cacheReadTokens": 6592,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7126,
+          "outputTokens": 15,
+          "totalTokensProcessed": 7141
+        },
+        {
+          "request": 12,
+          "inputTokens": 497,
+          "cacheReadTokens": 7104,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7601,
+          "outputTokens": 16,
+          "totalTokensProcessed": 7617
+        },
+        {
+          "request": 13,
+          "inputTokens": 544,
+          "cacheReadTokens": 7552,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8096,
+          "outputTokens": 16,
+          "totalTokensProcessed": 8112
+        },
+        {
+          "request": 14,
+          "inputTokens": 529,
+          "cacheReadTokens": 8064,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8593,
+          "outputTokens": 12,
+          "totalTokensProcessed": 8605
+        },
+        {
+          "request": 15,
+          "inputTokens": 92,
+          "cacheReadTokens": 8576,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8668,
+          "outputTokens": 11,
+          "totalTokensProcessed": 8679
+        }
+      ]
+    },
+    {
+      "arm": "baseline",
+      "seed": 3,
+      "gap": 12,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 12,
+      "inputTokens": 19098,
+      "cacheReadTokens": 66496,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 85594,
+      "outputTokens": 265,
+      "totalTokensProcessed": 85859,
+      "assistantRequests": 15,
+      "wallSeconds": 108.751,
+      "readCalls": 14,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 12,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-73BE1D7577",
+      "answer": "TOKEN-73BE1D7577",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 0,
+      "estimatedTokensSuppressed": 0,
+      "suppressedCharacters": 0,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 940,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 940,
+          "outputTokens": 54,
+          "totalTokensProcessed": 994
+        },
+        {
+          "request": 2,
+          "inputTokens": 1855,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2751,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2766
+        },
+        {
+          "request": 3,
+          "inputTokens": 3237,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3237,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3252
+        },
+        {
+          "request": 4,
+          "inputTokens": 522,
+          "cacheReadTokens": 3200,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3722,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3738
+        },
+        {
+          "request": 5,
+          "inputTokens": 512,
+          "cacheReadTokens": 3712,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4224,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4240
+        },
+        {
+          "request": 6,
+          "inputTokens": 499,
+          "cacheReadTokens": 4224,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4723,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4739
+        },
+        {
+          "request": 7,
+          "inputTokens": 546,
+          "cacheReadTokens": 4672,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5218,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5234
+        },
+        {
+          "request": 8,
+          "inputTokens": 529,
+          "cacheReadTokens": 5184,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5713,
+          "outputTokens": 15,
+          "totalTokensProcessed": 5728
+        },
+        {
+          "request": 9,
+          "inputTokens": 3511,
+          "cacheReadTokens": 2688,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6199,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6215
+        },
+        {
+          "request": 10,
+          "inputTokens": 1001,
+          "cacheReadTokens": 5696,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6697,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6713
+        },
+        {
+          "request": 11,
+          "inputTokens": 539,
+          "cacheReadTokens": 6656,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7195,
+          "outputTokens": 15,
+          "totalTokensProcessed": 7210
+        },
+        {
+          "request": 12,
+          "inputTokens": 507,
+          "cacheReadTokens": 7168,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7675,
+          "outputTokens": 16,
+          "totalTokensProcessed": 7691
+        },
+        {
+          "request": 13,
+          "inputTokens": 2033,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8177,
+          "outputTokens": 16,
+          "totalTokensProcessed": 8193
+        },
+        {
+          "request": 14,
+          "inputTokens": 1061,
+          "cacheReadTokens": 7616,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8677,
+          "outputTokens": 12,
+          "totalTokensProcessed": 8689
+        },
+        {
+          "request": 15,
+          "inputTokens": 1806,
+          "cacheReadTokens": 8640,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 10446,
+          "outputTokens": 11,
+          "totalTokensProcessed": 10457
+        }
+      ]
+    },
+    {
+      "arm": "dedupe",
+      "seed": 3,
+      "gap": 12,
+      "model": "cc-switch-packy-code/glm-5.3-flash",
+      "targetFile": "target.txt",
+      "fillerFiles": 12,
+      "inputTokens": 14897,
+      "cacheReadTokens": 68416,
+      "cacheWriteTokens": 0,
+      "promptTokensProcessed": 83313,
+      "outputTokens": 223,
+      "totalTokensProcessed": 83536,
+      "assistantRequests": 15,
+      "wallSeconds": 113.803,
+      "readCalls": 14,
+      "targetReadCalls": 2,
+      "fillerReadCalls": 12,
+      "actualReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "expectedReadSequence": [
+        "target.txt",
+        "filler-001.txt",
+        "filler-002.txt",
+        "filler-003.txt",
+        "filler-004.txt",
+        "filler-005.txt",
+        "filler-006.txt",
+        "filler-007.txt",
+        "filler-008.txt",
+        "filler-009.txt",
+        "filler-010.txt",
+        "filler-011.txt",
+        "filler-012.txt",
+        "target.txt"
+      ],
+      "protocolCompliant": true,
+      "expectedAnswer": "TOKEN-73BE1D7577",
+      "answer": "TOKEN-73BE1D7577",
+      "answerCorrect": true,
+      "duplicateOccurrencesSuppressed": 1,
+      "estimatedTokensSuppressed": 916,
+      "suppressedCharacters": 3665,
+      "requestUsage": [
+        {
+          "request": 1,
+          "inputTokens": 940,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 940,
+          "outputTokens": 12,
+          "totalTokensProcessed": 952
+        },
+        {
+          "request": 2,
+          "inputTokens": 1813,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 2709,
+          "outputTokens": 15,
+          "totalTokensProcessed": 2724
+        },
+        {
+          "request": 3,
+          "inputTokens": 507,
+          "cacheReadTokens": 2688,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3195,
+          "outputTokens": 15,
+          "totalTokensProcessed": 3210
+        },
+        {
+          "request": 4,
+          "inputTokens": 544,
+          "cacheReadTokens": 3136,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 3680,
+          "outputTokens": 16,
+          "totalTokensProcessed": 3696
+        },
+        {
+          "request": 5,
+          "inputTokens": 3286,
+          "cacheReadTokens": 896,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4182,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4198
+        },
+        {
+          "request": 6,
+          "inputTokens": 1033,
+          "cacheReadTokens": 3648,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 4681,
+          "outputTokens": 16,
+          "totalTokensProcessed": 4697
+        },
+        {
+          "request": 7,
+          "inputTokens": 504,
+          "cacheReadTokens": 4672,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5176,
+          "outputTokens": 16,
+          "totalTokensProcessed": 5192
+        },
+        {
+          "request": 8,
+          "inputTokens": 551,
+          "cacheReadTokens": 5120,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 5671,
+          "outputTokens": 15,
+          "totalTokensProcessed": 5686
+        },
+        {
+          "request": 9,
+          "inputTokens": 1997,
+          "cacheReadTokens": 4160,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6157,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6173
+        },
+        {
+          "request": 10,
+          "inputTokens": 511,
+          "cacheReadTokens": 6144,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 6655,
+          "outputTokens": 16,
+          "totalTokensProcessed": 6671
+        },
+        {
+          "request": 11,
+          "inputTokens": 1521,
+          "cacheReadTokens": 5632,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7153,
+          "outputTokens": 15,
+          "totalTokensProcessed": 7168
+        },
+        {
+          "request": 12,
+          "inputTokens": 529,
+          "cacheReadTokens": 7104,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 7633,
+          "outputTokens": 16,
+          "totalTokensProcessed": 7649
+        },
+        {
+          "request": 13,
+          "inputTokens": 519,
+          "cacheReadTokens": 7616,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8135,
+          "outputTokens": 16,
+          "totalTokensProcessed": 8151
+        },
+        {
+          "request": 14,
+          "inputTokens": 507,
+          "cacheReadTokens": 8128,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8635,
+          "outputTokens": 12,
+          "totalTokensProcessed": 8647
+        },
+        {
+          "request": 15,
+          "inputTokens": 135,
+          "cacheReadTokens": 8576,
+          "cacheWriteTokens": 0,
+          "promptTokensProcessed": 8711,
+          "outputTokens": 11,
+          "totalTokensProcessed": 8722
+        }
+      ]
+    }
+  ]
+}
