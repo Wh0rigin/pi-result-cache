@@ -1,0 +1,74 @@
+digraph PiResultCacheFlow {
+  graph [
+    rankdir=TB,
+    bgcolor="#ffffff",
+    fontname="Microsoft YaHei",
+    label="pi-result-cache 整体调用流程",
+    labelloc=t,
+    labeljust=c,
+    fontsize=22,
+    fontcolor="#1f2937",
+    pad=0.28,
+    nodesep=0.42,
+    ranksep=0.58,
+    splines=ortho
+  ];
+
+  node [
+    shape=rect,
+    style="rounded,filled",
+    fontname="Microsoft YaHei",
+    fontsize=13,
+    fontcolor="#1f2937",
+    color="#64748b",
+    penwidth=1.2,
+    margin="0.18,0.12"
+  ];
+
+  edge [
+    fontname="Microsoft YaHei",
+    fontsize=10,
+    fontcolor="#475569",
+    color="#64748b",
+    penwidth=1.2,
+    arrowsize=0.75
+  ];
+
+  user [label="用户提示词\n要求读取或搜索文件", fillcolor="#eaf2ff", color="#4f79a7"];
+  pi_start [label="Pi Coding Agent\n组装带工具的模型请求", fillcolor="#eaf2ff", color="#4f79a7"];
+  model_call [label="模型\n决定调用 read / grep", fillcolor="#f5efff", color="#8064a2"];
+  tool_exec [label="Pi 内置工具执行\n读取文件或搜索结果", fillcolor="#fff6e5", color="#b7791f"];
+  transcript [label="工具结果加入对话上下文\n原始结果仍写入 Pi 会话", fillcolor="#f2f4f7", color="#64748b"];
+
+  context [label="context 事件\n每次发起模型请求前触发", fillcolor="#fff6e5", color="#b7791f"];
+  inspect [label="插件筛选\nrole=toolResult · read/grep · 成功\n纯文本且长度 ≥ 256 字符", fillcolor="#eaf7f0", color="#36805f"];
+  hash [label="计算 SHA-256\nhash(toolName + content)", fillcolor="#eaf7f0", color="#36805f"];
+  decision [shape=diamond, label="哈希\n已出现？", fillcolor="#fff6e5", color="#b7791f", margin="0.14,0.08"];
+  original [label="首次结果\n保留完整内容", fillcolor="#eaf7f0", color="#36805f"];
+  duplicate [label="重复结果\n替换为短引用\n[pi-result-cache] Exact duplicate...", fillcolor="#eaf7f0", color="#36805f"];
+  unchanged [label="不符合条件\n原样保留", fillcolor="#f2f4f7", color="#64748b"];
+
+  request [label="Pi 发送变换后的上下文\n给模型提供方", fillcolor="#eaf2ff", color="#4f79a7"];
+  response [label="模型继续调用工具\n或返回最终答案", fillcolor="#f5efff", color="#8064a2"];
+  session [label="Pi 持久会话记录\n插件不改写", shape=note, fillcolor="#f2f4f7", color="#64748b"];
+  metrics [label="可选诊断\n/result-cache status\nPI_RESULT_CACHE_STATS_FILE", shape=note, fillcolor="#f2f4f7", color="#64748b"];
+
+  user -> pi_start;
+  pi_start -> model_call [label="首次请求"];
+  model_call -> tool_exec [label="工具调用"];
+  tool_exec -> transcript [label="toolResult"];
+  transcript -> context;
+  context -> inspect;
+  inspect -> hash [label="符合条件"];
+  inspect -> unchanged [label="其他结果"];
+  hash -> decision;
+  decision -> original [label="否"];
+  decision -> duplicate [label="是"];
+  original -> request;
+  duplicate -> request;
+  unchanged -> request;
+  request -> response [label="模型继续推理"];
+  response -> tool_exec [label="仍需工具时", constraint=false];
+  response -> session [style=dashed, arrowhead=none, label="会话保留原始记录"];
+  context -> metrics [style=dashed, arrowhead=none, label="可选统计"];
+}

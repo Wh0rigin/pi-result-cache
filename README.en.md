@@ -12,6 +12,14 @@ Pi Coding Agent extension that suppresses exact duplicate `read` and `grep` resu
 
 This can reduce repeated result text in later input contexts. It does not remove the tool call, its arguments, or the first full result. Provider prompt caching can affect billed cost, so compare Pi's input/cache usage fields rather than treating the extension's `chars / 4` estimate as a bill.
 
+## Overall call flow
+
+The diagram shows the complete path from the user prompt and tool execution through the `context` event to the model request, including where duplicate results are replaced.
+
+![pi-result-cache overall call flow](assets/call-flow.svg)
+
+The source diagram is [`docs/call-flow.dot`](docs/call-flow.dot).
+
 ## Install
 
 From this project directory:

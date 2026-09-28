@@ -14,6 +14,14 @@ English version: [README.en.md](README.en.md)
 
 它可以减少重复工具结果进入后续模型上下文的内容量。工具调用本身、调用参数和第一次完整结果仍会保留。供应商的 prompt 缓存可能使用不同的计费规则，因此应以 Pi 的 input/cache 用量字段评估效果，不要把 `字符数 / 4` 的估算直接当成账单金额。
 
+## 整体调用流程
+
+下图展示从用户提示词、工具执行、`context` 事件到模型请求的完整链路，以及重复结果被替换的位置。
+
+![pi-result-cache 整体调用流程](assets/call-flow.svg)
+
+图源文件见 [`docs/call-flow.dot`](docs/call-flow.dot)。
+
 ## 安装
 
 在项目目录执行：
