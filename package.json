@@ -1,0 +1,14 @@
+{
+  "name": "pi-result-cache",
+  "version": "0.1.0",
+  "description": "Request-local deduplication of identical Pi read and grep results",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "benchmark": "node scripts/benchmark.ts --seeds 5",
+    "charts": "python scripts/charts.py"
+  },
+  "pi": {
+    "extensions": ["./index.ts"]
+  }
+}
