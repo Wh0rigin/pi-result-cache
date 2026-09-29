@@ -126,3 +126,16 @@ test("an expired full result becomes the new anchor for later repeats", () => {
   assert.equal(result.messages.at(-3)!.content[0].text, body);
   assert.match(result.messages.at(-1)!.content[0].text, /call target-2/);
 });
+
+test("allows callers to choose their own expiry threshold", () => {
+  const body = "target payload\n".repeat(30);
+  const result = deduplicateToolResults([
+    toolResult("read", "target-1", body),
+    ...Array.from({ length: 8 }, (_, index) => toolResult("bash", `f${index}`, "short filler")),
+    toolResult("read", "target-2", body),
+  ], undefined, 8);
+
+  assert.equal(result.stats.expiredOccurrences, 1);
+  assert.equal(result.stats.duplicateOccurrences, 0);
+  assert.equal(result.messages.at(-1)!.content[0].text, body);
+});

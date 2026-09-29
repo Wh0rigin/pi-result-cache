@@ -36,9 +36,9 @@ pi install -l .
 pi --extension ./index.ts
 ```
 
-`/result-cache` 命令可以查看计数器。使用 `/result-cache off`、`/result-cache on` 或 `/result-cache reset` 可以控制当前 Pi 进程。
+`/result-cache` 命令可以查看计数器。使用 `/result-cache off`、`/result-cache on` 或 `/result-cache reset` 可以控制当前 Pi 进程；`/result-cache expire-after 15` 可在会话中修改过期阈值。
 
-默认最多跨越 14 个中间工具结果去重；间隔达到 15 个查询时，旧哈希过期，本次完整结果会保留并成为新的比较起点。所有工具结果都会计入间隔，即使它们不是 `read` / `grep`。可通过环境变量 `PI_RESULT_CACHE_MAX_GAP` 调整允许的最大间隔。
+默认过期阈值为 15 个中间工具结果；达到阈值时，旧哈希过期，本次完整结果会保留并成为新的比较起点。所有工具结果都会计入间隔，即使它们不是 `read` / `grep`。可通过 `PI_RESULT_CACHE_EXPIRE_AFTER` 或 `/result-cache expire-after <数量>` 自行设置，至少为 1；旧环境变量 `PI_RESULT_CACHE_MAX_GAP` 仍可用。
 
 ## 本地验证
 
@@ -77,7 +77,7 @@ npm run charts:distance
 
 本轮每个条件 3 个种子配对实验中，prompt token 平均减少比例分别为 21.5%、4.4% 和 2.3%；三种间隔下两组的答案准确率和完整读取顺序均为 3/3。间隔越长时 filler 内容占比越高，因此固定的重复目标结果只占总 prompt 的一小部分，节省比例会下降。
 
-过期边界实验会对比 12 和 15 个 filler 查询，在最多允许跨越 14 个中间查询时观察重复结果是否仍被压缩或已恢复完整输出：
+过期边界实验会对比 12 和 15 个 filler 查询，在默认 15 个中间工具结果的阈值下观察重复结果是否仍被压缩或已恢复完整输出：
 
 ```bash
 npm run benchmark:expiry

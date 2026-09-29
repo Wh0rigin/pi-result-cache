@@ -1,18 +1,21 @@
 import { appendFileSync } from "node:fs";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import {
-  DEFAULT_MAX_INTERVENING_TOOL_RESULTS,
+  DEFAULT_EXPIRE_AFTER_TOOL_RESULTS,
   deduplicateToolResults,
   type DeduplicationStats,
 } from "./src/deduplicate.ts";
 
 const COMMAND = "result-cache";
 
-function maxInterveningToolResultsFromEnv(): number {
-  const configured = Number(process.env.PI_RESULT_CACHE_MAX_GAP);
-  return Number.isInteger(configured) && configured >= 0
-    ? configured
-    : DEFAULT_MAX_INTERVENING_TOOL_RESULTS;
+function expireAfterToolResultsFromEnv(): number {
+  const configured = Number(process.env.PI_RESULT_CACHE_EXPIRE_AFTER);
+  if (Number.isInteger(configured) && configured >= 1) return configured;
+
+  // Keep the earlier max-gap variable working with its original `>` semantics.
+  const legacyMaxGap = Number(process.env.PI_RESULT_CACHE_MAX_GAP);
+  if (Number.isInteger(legacyMaxGap) && legacyMaxGap >= 0) return legacyMaxGap + 1;
+  return DEFAULT_EXPIRE_AFTER_TOOL_RESULTS;
 }
 
 export default function resultCacheExtension(pi: ExtensionAPI) {
@@ -23,13 +26,13 @@ export default function resultCacheExtension(pi: ExtensionAPI) {
   let suppressedCharacters = 0;
   let estimatedTokensSuppressed = 0;
   const metricsFile = process.env.PI_RESULT_CACHE_STATS_FILE;
-  const maxInterveningToolResults = maxInterveningToolResultsFromEnv();
+  let expireAfterToolResults = expireAfterToolResultsFromEnv();
 
   pi.on("context", (event) => {
     contextRequests += 1;
     if (!enabled) return;
 
-    const result = deduplicateToolResults(event.messages, undefined, maxInterveningToolResults);
+    const result = deduplicateToolResults(event.messages, undefined, expireAfterToolResults);
     duplicateOccurrences += result.stats.duplicateOccurrences;
     expiredOccurrences += result.stats.expiredOccurrences;
     suppressedCharacters += result.stats.suppressedCharacters;
@@ -57,10 +60,15 @@ export default function resultCacheExtension(pi: ExtensionAPI) {
   pi.registerCommand(COMMAND, {
     description: "Inspect or toggle repeated read/grep result suppression",
     handler: async (args, ctx) => {
-      const subcommand = args.trim().toLowerCase();
+      const [subcommand = "", rawValue] = args.trim().toLowerCase().split(/\s+/, 2);
+      let configMessage: string | undefined;
       if (subcommand === "on") enabled = true;
       else if (subcommand === "off") enabled = false;
-      else if (subcommand === "reset") {
+      else if (subcommand === "expire-after") {
+        const configured = Number(rawValue);
+        if (Number.isInteger(configured) && configured >= 1) expireAfterToolResults = configured;
+        else configMessage = "expire-after requires a positive integer";
+      } else if (subcommand === "reset") {
         contextRequests = 0;
         duplicateOccurrences = 0;
         expiredOccurrences = 0;
@@ -70,13 +78,14 @@ export default function resultCacheExtension(pi: ExtensionAPI) {
 
       ctx.ui.notify(
         [
+          ...(configMessage ? [configMessage] : []),
           `result-cache ${enabled ? "enabled" : "disabled"}`,
           `context requests: ${contextRequests}`,
           `duplicate results suppressed: ${duplicateOccurrences}`,
-          `old results expired after ${maxInterveningToolResults} intervening tool results: ${expiredOccurrences}`,
+          `expire after ${expireAfterToolResults} intervening tool results; expired occurrences: ${expiredOccurrences}`,
           `estimated input tokens suppressed: ${estimatedTokensSuppressed}`,
           `characters suppressed: ${suppressedCharacters}`,
-          "Usage: /result-cache [on|off|reset|status]",
+          "Usage: /result-cache [on|off|expire-after <n>|reset|status]",
         ].join("\n"),
         "info",
       );

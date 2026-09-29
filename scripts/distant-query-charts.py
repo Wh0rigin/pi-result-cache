@@ -203,7 +203,7 @@ def fig_suppression(report: dict, rows: list[dict], gaps: list[int]) -> None:
         axes,
         ["duplicateOccurrencesSuppressed", "estimatedTokensSuppressed", "expiredOccurrences"],
         ["平均重复结果替换次数", "平均估算抑制 token", "平均过期次数"],
-        ["间隔变远后的插件命中次数", "字符估算的抑制量", "超出间隔上限的结果"],
+        ["间隔变远后的插件命中次数", "字符估算的抑制量", "达到阈值后过期的结果"],
     ):
         x = np.arange(len(gaps))
         values = []
@@ -303,7 +303,7 @@ def format_metric(value: float) -> str:
 
 
 def make_report(report: dict, rows: list[dict], gaps: list[int]) -> None:
-    max_gap = report.get("maxInterveningToolResults")
+    expire_after = report.get("expireAfterToolResults")
     title = "# 两次查询间隔过期策略实验验证" if "expiry" in ASSET_PREFIX else "# 两次查询间隔实验验证"
     gap_summary = " 或 ".join(str(gap) for gap in sorted({int(row["gap"]) for row in rows}))
     lines = [
@@ -315,8 +315,8 @@ def make_report(report: dict, rows: list[dict], gaps: list[int]) -> None:
         "- 这里用中间查询次数模拟“对话间隔较远”；它测试上下文中间插入多轮内容的效果，不等同于让程序空等一段墙钟时间。",
         "- 基线关闭插件；去重组加载插件。两组使用同一模型、提示、只读工具权限和文件种子。",
         (
-            f"- 过期规则：最多允许 {report['maxInterveningToolResults']} 个中间工具结果（对应实验中的 filler 查询）；超过后保留当前完整结果作为新锚点。"
-            if report.get("maxInterveningToolResults") is not None
+            f"- 过期规则：达到 {report['expireAfterToolResults']} 个中间工具结果（对应实验中的 filler 查询）时，保留当前完整结果并重置锚点。"
+            if report.get("expireAfterToolResults") is not None
             else "- 此数据集没有设置间隔上限，记录的是按当时原实现进行的历史对照。"
         ),
         "",
@@ -344,9 +344,9 @@ def make_report(report: dict, rows: list[dict], gaps: list[int]) -> None:
         expired = statistics.mean(dedupe[seed].get("expiredOccurrences", 0) for seed in seeds)
         estimate = statistics.mean(dedupe[seed].get("estimatedTokensSuppressed", 0) for seed in seeds)
         expiry_note = ""
-        if max_gap is not None and gap > max_gap:
+        if expire_after is not None and gap >= expire_after:
             expiry_note = (
-                f"；该间隔超过 {max_gap} 次上限，完整重复结果被保留，扩展抑制为 0；"
+                f"；该间隔达到 {expire_after} 次过期阈值，完整重复结果被保留，扩展抑制为 0；"
                 "端到端 prompt 总量的微小差异不应解释为插件节省"
             )
         lines.append(
@@ -420,9 +420,9 @@ def main() -> None:
     ASSET_PREFIX = args.asset_prefix
     ASSETS.mkdir(parents=True, exist_ok=True)
     report, rows = load_results()
-    max_gap = report.get("maxInterveningToolResults")
-    if max_gap is not None:
-        LABELS[DEDUPE] = f"结果去重（间隔上限 {max_gap}）"
+    expire_after = report.get("expireAfterToolResults")
+    if expire_after is not None:
+        LABELS[DEDUPE] = f"结果去重（{expire_after} 个工具结果后过期）"
     gaps = sorted({int(row["gap"]) for row in rows})
     if not gaps:
         raise SystemExit("No gap conditions found in distant-query results.")

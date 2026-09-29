@@ -7,7 +7,7 @@
     12,
     15
   ],
-  "maxInterveningToolResults": 14,
+  "expireAfterToolResults": 15,
   "fixture": {
     "targetRows": 72,
     "targetRow": 53,

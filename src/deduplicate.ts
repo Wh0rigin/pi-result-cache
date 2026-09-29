@@ -4,8 +4,8 @@ const ELIGIBLE_TOOLS = new Set(["read", "grep"]);
 
 /** Avoid replacing small results where the reference would save little or nothing. */
 export const DEFAULT_MIN_RESULT_CHARS = 256;
-/** Keep a repeated result fresh after at most this many intervening tool results. */
-export const DEFAULT_MAX_INTERVENING_TOOL_RESULTS = 14;
+/** Refresh the repeated result when this many tool results intervene. */
+export const DEFAULT_EXPIRE_AFTER_TOOL_RESULTS = 15;
 
 export interface DeduplicationStats {
   eligibleResults: number;
@@ -35,13 +35,14 @@ interface FirstOccurrence {
 
 /**
  * Replace exact, repeated read/grep payloads in a request-local Pi transcript.
- * The first result remains verbatim. Later copies become short pointers to it.
+ * Repeated payloads become short pointers until their intervening-tool-result age expires.
+ * Each expired copy stays verbatim and becomes the new anchor.
  * The input array and the persisted Pi session are never mutated.
  */
 export function deduplicateToolResults<T>(
   messages: readonly T[],
   minResultChars = DEFAULT_MIN_RESULT_CHARS,
-  maxInterveningToolResults = DEFAULT_MAX_INTERVENING_TOOL_RESULTS,
+  expireAfterToolResults = DEFAULT_EXPIRE_AFTER_TOOL_RESULTS,
 ): DeduplicationResult<T> {
   const output = [...messages];
   const seen = new Map<string, FirstOccurrence>();
@@ -103,7 +104,7 @@ export function deduplicateToolResults<T>(
     }
 
     const interveningToolResults = currentQueryOrdinal - previous.queryOrdinal - 1;
-    if (interveningToolResults > maxInterveningToolResults) {
+    if (interveningToolResults >= expireAfterToolResults) {
       // Let this full result become the new anchor. The next identical result can
       // be shortened again until this anchor itself ages out of the window.
       seen.set(fingerprint, {

@@ -4,7 +4,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from "node:os";
 import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { DEFAULT_MAX_INTERVENING_TOOL_RESULTS } from "../src/deduplicate.ts";
+import { DEFAULT_EXPIRE_AFTER_TOOL_RESULTS } from "../src/deduplicate.ts";
 
 type Arm = "baseline" | "dedupe";
 
@@ -89,11 +89,22 @@ function parsePositiveIntFlag(name: string, fallback: number): number {
   return Number.isInteger(value) && value > 0 ? value : fallback;
 }
 
-function parseNonNegativeIntFlag(name: string, fallback: number): number {
-  const index = process.argv.indexOf(name);
-  if (index < 0) return fallback;
-  const value = Number(process.argv[index + 1]);
-  return Number.isInteger(value) && value >= 0 ? value : fallback;
+function parseExpireAfterToolResults(): number {
+  const expireIndex = process.argv.indexOf("--expire-after");
+  if (expireIndex >= 0) {
+    const value = Number(process.argv[expireIndex + 1]);
+    if (!Number.isInteger(value) || value < 1) throw new Error("--expire-after must be a positive integer");
+    return value;
+  }
+
+  // Backwards compatibility for the previous --max-gap option.
+  const maxGapIndex = process.argv.indexOf("--max-gap");
+  if (maxGapIndex >= 0) {
+    const value = Number(process.argv[maxGapIndex + 1]);
+    if (!Number.isInteger(value) || value < 0) throw new Error("--max-gap must be a non-negative integer");
+    return value + 1;
+  }
+  return DEFAULT_EXPIRE_AFTER_TOOL_RESULTS;
 }
 
 function parseResultPath(): string {
@@ -283,7 +294,7 @@ function runOne(
   arm: Arm,
   seed: number,
   gap: number,
-  maxGap: number,
+  expireAfterToolResults: number,
   workspace: string,
   expectedAnswer: string,
 ): RunResult {
@@ -315,7 +326,7 @@ function runOne(
       PI_SKIP_VERSION_CHECK: "1",
       ...(arm === "dedupe" ? {
         PI_RESULT_CACHE_STATS_FILE: metricsPath,
-        PI_RESULT_CACHE_MAX_GAP: String(maxGap),
+        PI_RESULT_CACHE_EXPIRE_AFTER: String(expireAfterToolResults),
       } : {}),
     },
   });
@@ -376,12 +387,12 @@ async function main(): Promise<void> {
   const gaps = parseGaps();
   const seeds = parsePositiveIntFlag("--seeds", 3);
   const seedStart = parsePositiveIntFlag("--seed-start", 1);
-  const maxGap = parseNonNegativeIntFlag("--max-gap", DEFAULT_MAX_INTERVENING_TOOL_RESULTS);
+  const expireAfterToolResults = parseExpireAfterToolResults();
   const resultPath = parseResultPath();
   const appendResults = process.argv.includes("--append");
   if (!existsSync(EXTENSION)) throw new Error(`Extension not found: ${EXTENSION}`);
 
-  console.log(`Pi distant-query A/B benchmark: gaps=${gaps.join(",")} seeds=${seeds} max-intervening-tool-results=${maxGap}`);
+  console.log(`Pi distant-query A/B benchmark: gaps=${gaps.join(",")} seeds=${seeds} expire-after=${expireAfterToolResults}-tool-results`);
   console.log(`model=${MODEL}; target=${TARGET_ROW_COUNT} rows; gap files=${FILLER_ROW_COUNT} rows each`);
 
   const results: RunResult[] = [];
@@ -399,7 +410,7 @@ async function main(): Promise<void> {
       try {
         for (const arm of order) {
           process.stdout.write(`[gap ${gap} seed ${seed}] ${arm} ... `);
-          const run = runOne(arm, seed, gap, maxGap, workspace, target.answer);
+          const run = runOne(arm, seed, gap, expireAfterToolResults, workspace, target.answer);
           results.push(run);
           console.log(
             `${run.wallSeconds.toFixed(1)}s | prompt ${run.promptTokensProcessed} | requests ${run.assistantRequests} | ` +
@@ -469,7 +480,7 @@ async function main(): Promise<void> {
     piVersion: "0.87.1",
     repetitionsPerCondition: seeds,
     gaps,
-    maxInterveningToolResults: maxGap,
+    expireAfterToolResults,
     fixture: { targetRows: TARGET_ROW_COUNT, targetRow: TARGET_ROW, fillerRows: FILLER_ROW_COUNT },
     task: "Read target.txt, read distinct filler files during an intervening gap, then read target.txt again and return its target token.",
     arms: ["baseline (extension disabled)", "dedupe (request-local context deduplication)"],

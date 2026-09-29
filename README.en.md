@@ -34,9 +34,9 @@ Or try it for one session:
 pi --extension ./index.ts
 ```
 
-The command `/result-cache` shows counters. Use `/result-cache off`, `/result-cache on`, or `/result-cache reset` to control the current Pi process.
+The command `/result-cache` shows counters. Use `/result-cache off`, `/result-cache on`, or `/result-cache reset` to control the current Pi process. `/result-cache expire-after 15` changes the expiry threshold for the current session.
 
-By default, deduplication spans at most 14 intervening tool results. At a gap of 15, the old hash expires and the current full result becomes the new comparison anchor. All tool results count toward the gap, including tools other than `read` and `grep`. Set `PI_RESULT_CACHE_MAX_GAP` to change the allowed distance.
+The default expiry threshold is 15 intervening tool results. At the threshold, the old hash expires and the current full result becomes the new comparison anchor. All tool results count toward the gap, including tools other than `read` and `grep`. Set `PI_RESULT_CACHE_EXPIRE_AFTER` or use `/result-cache expire-after <count>` to change the threshold; values must be at least 1. The older `PI_RESULT_CACHE_MAX_GAP` variable remains supported.
 
 ## Verify locally
 
@@ -75,7 +75,7 @@ It measures the effect when the repeated query is far apart in the conversation 
 
 Across three paired seeds per condition, mean prompt-token reduction was 21.5%, 4.4%, and 2.3% with 0, 6, and 12 filler reads. Both arms achieved 3/3 exact answers and 3/3 complete read sequences at every gap. As the gap grows, filler content dominates the prompt, so the fixed repeated target result represents a smaller share of total usage.
 
-The expiry-boundary experiment compares 12 and 15 filler reads with a maximum gap of 14 intervening queries:
+The expiry-boundary experiment compares 12 and 15 filler reads with the default expiry threshold of 15 intervening tool results:
 
 ```bash
 npm run benchmark:expiry
