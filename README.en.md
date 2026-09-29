@@ -36,6 +36,8 @@ pi --extension ./index.ts
 
 The command `/result-cache` shows counters. Use `/result-cache off`, `/result-cache on`, or `/result-cache reset` to control the current Pi process.
 
+By default, deduplication spans at most 14 intervening tool results. At a gap of 15, the old hash expires and the current full result becomes the new comparison anchor. All tool results count toward the gap, including tools other than `read` and `grep`. Set `PI_RESULT_CACHE_MAX_GAP` to change the allowed distance.
+
 ## Verify locally
 
 ```bash
@@ -72,6 +74,17 @@ npm run charts:distance
 It measures the effect when the repeated query is far apart in the conversation while the earlier result may still be retained in context. See the [full distant-query validation report](docs/distant-query-validation.md) for all charts.
 
 Across three paired seeds per condition, mean prompt-token reduction was 21.5%, 4.4%, and 2.3% with 0, 6, and 12 filler reads. Both arms achieved 3/3 exact answers and 3/3 complete read sequences at every gap. As the gap grows, filler content dominates the prompt, so the fixed repeated target result represents a smaller share of total usage.
+
+The expiry-boundary experiment compares 12 and 15 filler reads with a maximum gap of 14 intervening queries:
+
+```bash
+npm run benchmark:expiry
+npm run charts:expiry
+```
+
+See the [full distant-query expiry report](docs/distant-query-expiry-validation.md) for all charts.
+
+In the measured runs, all three 12-filler cases hit and suppressed about 916 estimated tokens each. At 15 fillers, all three old results expired with zero hits and zero suppression; answer accuracy and read-protocol adherence were 3/3 in both arms. The 0.4% mean prompt-usage difference is run variation, not cache savings.
 
 Override the model or number of paired runs:
 

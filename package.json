@@ -10,7 +10,9 @@
     "benchmark:long": "node scripts/long-session-benchmark.ts --repeats 4,8,12 --seeds 3",
     "charts:long": "python scripts/long-session-charts.py",
     "benchmark:distance": "node scripts/distant-query-benchmark.ts --gaps 0,6,12 --seeds 3",
-    "charts:distance": "python scripts/distant-query-charts.py"
+    "charts:distance": "python scripts/distant-query-charts.py",
+    "benchmark:expiry": "node scripts/distant-query-benchmark.ts --gaps 12,15 --max-gap 14 --seeds 3 --results results/distant-query-expiry-results.json",
+    "charts:expiry": "python scripts/distant-query-charts.py --input results/distant-query-expiry-results.json --report docs/distant-query-expiry-validation.md --asset-prefix distant-query-expiry"
   },
   "pi": {
     "extensions": ["./index.ts"]

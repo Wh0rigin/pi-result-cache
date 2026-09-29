@@ -87,3 +87,42 @@ test("only exact byte-identical output from the same tool matches", () => {
   assert.equal(result.messages[1].content[0].text, `${body}different`);
   assert.equal(result.messages[2].content[0].text, body);
 });
+
+test("expires a repeated hash after the configured number of intervening tool results", () => {
+  const body = "target payload\n".repeat(30);
+  const filler = (index: number) => toolResult(index % 2 === 0 ? "read" : "bash", `f${index}`, "short filler");
+  const withinWindow = deduplicateToolResults([
+    toolResult("read", "target-1", body),
+    ...Array.from({ length: 14 }, (_, index) => filler(index)),
+    toolResult("read", "target-2", body),
+  ]);
+  assert.equal(withinWindow.stats.duplicateOccurrences, 1);
+  assert.equal(withinWindow.stats.expiredOccurrences, 0);
+  assert.match(withinWindow.messages.at(-1)!.content[0].text, /Exact duplicate/);
+
+  const afterWindow = deduplicateToolResults([
+    toolResult("read", "target-1", body),
+    ...Array.from({ length: 15 }, (_, index) => filler(index)),
+    toolResult("read", "target-2", body),
+  ]);
+  assert.equal(afterWindow.stats.duplicateOccurrences, 0);
+  assert.equal(afterWindow.stats.expiredOccurrences, 1);
+  assert.equal(afterWindow.messages.at(-1)!.content[0].text, body);
+});
+
+test("an expired full result becomes the new anchor for later repeats", () => {
+  const body = "target payload\n".repeat(30);
+  const messages = [
+    toolResult("read", "target-1", body),
+    ...Array.from({ length: 15 }, (_, index) => toolResult("read", `f${index}`, "short filler")),
+    toolResult("read", "target-2", body),
+    toolResult("grep", "new-gap", "short query result"),
+    toolResult("read", "target-3", body),
+  ];
+
+  const result = deduplicateToolResults(messages);
+  assert.equal(result.stats.expiredOccurrences, 1);
+  assert.equal(result.stats.duplicateOccurrences, 1);
+  assert.equal(result.messages.at(-3)!.content[0].text, body);
+  assert.match(result.messages.at(-1)!.content[0].text, /call target-2/);
+});

@@ -38,6 +38,8 @@ pi --extension ./index.ts
 
 `/result-cache` 命令可以查看计数器。使用 `/result-cache off`、`/result-cache on` 或 `/result-cache reset` 可以控制当前 Pi 进程。
 
+默认最多跨越 14 个中间工具结果去重；间隔达到 15 个查询时，旧哈希过期，本次完整结果会保留并成为新的比较起点。所有工具结果都会计入间隔，即使它们不是 `read` / `grep`。可通过环境变量 `PI_RESULT_CACHE_MAX_GAP` 调整允许的最大间隔。
+
 ## 本地验证
 
 ```bash
@@ -74,6 +76,17 @@ npm run charts:distance
 这个实验先读取目标文件，再插入 0、6、12 个不同的 filler 查询，最后再次读取目标文件，用来观察上下文距离变远但旧结果仍可能保留时的去重效果。完整图表见[间隔查询实验报告](docs/distant-query-validation.md)。
 
 本轮每个条件 3 个种子配对实验中，prompt token 平均减少比例分别为 21.5%、4.4% 和 2.3%；三种间隔下两组的答案准确率和完整读取顺序均为 3/3。间隔越长时 filler 内容占比越高，因此固定的重复目标结果只占总 prompt 的一小部分，节省比例会下降。
+
+过期边界实验会对比 12 和 15 个 filler 查询，在最多允许跨越 14 个中间查询时观察重复结果是否仍被压缩或已恢复完整输出：
+
+```bash
+npm run benchmark:expiry
+npm run charts:expiry
+```
+
+完整图表见[间隔过期实验报告](docs/distant-query-expiry-validation.md)。
+
+实测中，12 个 filler 条件每个种子都命中并抑制约 916 个估算 token；15 个 filler 条件每个种子都让旧结果过期，命中和抑制均为 0，基线与插件组答案/读取协议都是 3/3。总 prompt 用量平均只差 0.4%，这点差异是运行波动，不算插件节省。
 
 覆盖模型或配对运行次数：
 

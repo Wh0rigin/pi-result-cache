@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import math
 import statistics
+import argparse
 import textwrap
 from pathlib import Path
 
@@ -20,6 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results" / "distant-query-results.json"
 ASSETS = ROOT / "assets"
 DOCS = ROOT / "docs"
+REPORT_OUTPUT = DOCS / "distant-query-validation.md"
+ASSET_PREFIX = "distant-query"
 BASELINE = "baseline"
 DEDUPE = "dedupe"
 ARM_ORDER = [BASELINE, DEDUPE]
@@ -93,8 +96,12 @@ def add_caption(ax: plt.Axes, caption: str, width: int = 112) -> None:
 
 
 def save(fig: plt.Figure, filename: str) -> None:
-    fig.savefig(ASSETS / filename)
+    fig.savefig(ASSETS / asset_name(filename))
     plt.close(fig)
+
+
+def asset_name(filename: str) -> str:
+    return filename.replace("distant-query-", f"{ASSET_PREFIX}-", 1)
 
 
 def fig_prompt_by_gap(report: dict, rows: list[dict], gaps: list[int]) -> None:
@@ -191,12 +198,12 @@ def fig_trajectory(report: dict, rows: list[dict], gaps: list[int]) -> None:
 
 
 def fig_suppression(report: dict, rows: list[dict], gaps: list[int]) -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(10.0, 4.8))
+    fig, axes = plt.subplots(1, 3, figsize=(14.0, 4.8))
     for axis, field, ylabel, title in zip(
         axes,
-        ["duplicateOccurrencesSuppressed", "estimatedTokensSuppressed"],
-        ["平均重复结果替换次数", "平均估算抑制 token"],
-        ["间隔变远后的插件命中次数", "字符估算的抑制量"],
+        ["duplicateOccurrencesSuppressed", "estimatedTokensSuppressed", "expiredOccurrences"],
+        ["平均重复结果替换次数", "平均估算抑制 token", "平均过期次数"],
+        ["间隔变远后的插件命中次数", "字符估算的抑制量", "超出间隔上限的结果"],
     ):
         x = np.arange(len(gaps))
         values = []
@@ -214,7 +221,7 @@ def fig_suppression(report: dict, rows: list[dict], gaps: list[int]) -> None:
         axis.set_xlabel("filler 查询次数")
         axis.set_ylabel(ylabel)
         axis.set_ylim(bottom=0)
-    fig.suptitle("间隔拉长时插件的重复结果命中", y=1.03, fontsize=14)
+    fig.suptitle("间隔拉长时插件的重复结果命中与过期", y=1.03, fontsize=14)
     fig.text(0.01, -0.01, "估算抑制 token = 字符数 / 4，仅作诊断；账单应以供应商价格和 Pi usage 字段为准。 " + source_caption(report), fontsize=8, color="#555555")
     fig.tight_layout()
     save(fig, "distant-query-suppression-metrics.png")
@@ -296,14 +303,22 @@ def format_metric(value: float) -> str:
 
 
 def make_report(report: dict, rows: list[dict], gaps: list[int]) -> None:
+    max_gap = report.get("maxInterveningToolResults")
+    title = "# 两次查询间隔过期策略实验验证" if "expiry" in ASSET_PREFIX else "# 两次查询间隔实验验证"
+    gap_summary = " 或 ".join(str(gap) for gap in sorted({int(row["gap"]) for row in rows}))
     lines = [
-        "# 两次查询间隔实验验证",
+        title,
         "",
         f"- 生成时间：{report.get('generatedAt', 'unknown')}",
         f"- Pi 模型：`{report.get('model', 'unknown')}`；Pi 版本：`{report.get('piVersion', 'unknown')}`；每个间隔条件 {report.get('repetitionsPerCondition', '?')} 个种子配对。",
-        f"- 任务：先读取 `target.txt`，再读取 0、6、12 个不同的 filler 文件，最后再次读取 `target.txt` 并提取目标 token。目标文件 {report.get('fixture', {}).get('targetRows', '?')} 行，每个 filler 文件 {report.get('fixture', {}).get('fillerRows', '?')} 行。",
+        f"- 任务：先读取 `target.txt`，按条件插入 {gap_summary} 个不同 filler 文件，再次读取 `target.txt` 并提取目标 token。目标文件 {report.get('fixture', {}).get('targetRows', '?')} 行，每个 filler 文件 {report.get('fixture', {}).get('fillerRows', '?')} 行。",
         "- 这里用中间查询次数模拟“对话间隔较远”；它测试上下文中间插入多轮内容的效果，不等同于让程序空等一段墙钟时间。",
         "- 基线关闭插件；去重组加载插件。两组使用同一模型、提示、只读工具权限和文件种子。",
+        (
+            f"- 过期规则：最多允许 {report['maxInterveningToolResults']} 个中间工具结果（对应实验中的 filler 查询）；超过后保留当前完整结果作为新锚点。"
+            if report.get("maxInterveningToolResults") is not None
+            else "- 此数据集没有设置间隔上限，记录的是按当时原实现进行的历史对照。"
+        ),
         "",
         "## 结果摘要",
         "",
@@ -326,9 +341,16 @@ def make_report(report: dict, rows: list[dict], gaps: list[int]) -> None:
         base_filler = statistics.mean(baseline[seed].get("fillerReadCalls", 0) for seed in seeds)
         dedupe_filler = statistics.mean(dedupe[seed].get("fillerReadCalls", 0) for seed in seeds)
         hits = statistics.mean(dedupe[seed].get("duplicateOccurrencesSuppressed", 0) for seed in seeds)
+        expired = statistics.mean(dedupe[seed].get("expiredOccurrences", 0) for seed in seeds)
         estimate = statistics.mean(dedupe[seed].get("estimatedTokensSuppressed", 0) for seed in seeds)
+        expiry_note = ""
+        if max_gap is not None and gap > max_gap:
+            expiry_note = (
+                f"；该间隔超过 {max_gap} 次上限，完整重复结果被保留，扩展抑制为 0；"
+                "端到端 prompt 总量的微小差异不应解释为插件节省"
+            )
         lines.append(
-            f"- **间隔 {gap} 个 filler 查询（n={len(seeds)}）**：平均 prompt token 从 {format_metric(base_prompt)} 降到 {format_metric(dedupe_prompt)}，减少 **{reduction:.1f}%**；准确率为基线 {base_correct}/{len(seeds)}、去重 {dedupe_correct}/{len(seeds)}；完整序列遵守率为基线 {base_protocol}/{len(seeds)}、去重 {dedupe_protocol}/{len(seeds)}；目标文件平均读取次数为基线 {base_target:.1f}、去重 {dedupe_target:.1f}，filler 平均读取次数为基线 {base_filler:.1f}、去重 {dedupe_filler:.1f}；去重组平均命中 {hits:,.0f} 次，字符估算抑制约 {estimate:,.0f} token。"
+            f"- **间隔 {gap} 个 filler 查询（n={len(seeds)}）**：平均 prompt token 从 {format_metric(base_prompt)} 降到 {format_metric(dedupe_prompt)}，减少 **{reduction:.1f}%**；准确率为基线 {base_correct}/{len(seeds)}、去重 {dedupe_correct}/{len(seeds)}；完整序列遵守率为基线 {base_protocol}/{len(seeds)}、去重 {dedupe_protocol}/{len(seeds)}；目标文件平均读取次数为基线 {base_target:.1f}、去重 {dedupe_target:.1f}，filler 平均读取次数为基线 {base_filler:.1f}、去重 {dedupe_filler:.1f}；去重组平均命中 {hits:,.0f} 次、过期 {expired:,.0f} 次，字符估算抑制约 {estimate:,.0f} token{expiry_note}。"
         )
 
     lines.extend([
@@ -337,32 +359,33 @@ def make_report(report: dict, rows: list[dict], gaps: list[int]) -> None:
         "",
         "### prompt token 流量",
         "",
-        "![Distant query prompt token traffic](../assets/distant-query-prompt-by-gap.png)",
+        f"![Distant query prompt token traffic](../assets/{asset_name('distant-query-prompt-by-gap.png')})",
         "",
         "### 节省比例",
         "",
-        "![Distant query savings](../assets/distant-query-savings-by-gap.png)",
+        f"![Distant query savings](../assets/{asset_name('distant-query-savings-by-gap.png')})",
         "",
         "### 每次模型请求的累计增长轨迹",
         "",
-        "![Distant query cumulative trajectory](../assets/distant-query-cumulative-trajectory.png)",
+        f"![Distant query cumulative trajectory](../assets/{asset_name('distant-query-cumulative-trajectory.png')})",
         "",
         "### 去重命中和估算抑制量",
         "",
-        "![Distant query suppression metrics](../assets/distant-query-suppression-metrics.png)",
+        f"![Distant query suppression metrics](../assets/{asset_name('distant-query-suppression-metrics.png')})",
         "",
         "### 正确性与完整序列遵守率",
         "",
-        "![Distant query quality](../assets/distant-query-quality.png)",
+        f"![Distant query quality](../assets/{asset_name('distant-query-quality.png')})",
         "",
         "### 目标与 filler 调用漂移",
         "",
-        "![Distant query protocol components](../assets/distant-query-protocol-components.png)",
+        f"![Distant query protocol components](../assets/{asset_name('distant-query-protocol-components.png')})",
         "",
         "## 如何理解“遗忘”",
         "",
-        "- 如果 Pi 仍把第一次 `target.txt` 结果保留在 `context` 事件的消息数组中，插件可以在最后一次 target 查询之后识别完全相同的结果，即使中间隔了许多 filler 查询。",
+        "- 如果 Pi 仍把第一次 `target.txt` 结果保留在 `context` 事件的消息数组中，插件可以在最后一次 target 查询之后识别完全相同的结果；启用过期阈值后，超过阈值会保留新的完整副本来刷新上下文。",
         "- 如果 Pi 因上下文压缩、截断或其他策略已经移除了第一次结果，插件没有跨会话数据库，不能凭空恢复它；这类情况应通过 `protocol`、答案准确率和命中次数一起判断。",
+        "- 过期上限是可配置的工程策略，不是模型记忆开始衰减的普适临界值；本实验只验证在 12 和 15 个 filler 查询处的边界行为。",
         "- 这个实验的主要变量是中间轮次数量，因此能说明“距离变远但上下文仍保留”时的作用；它不能单独证明任何供应商模型在真实长时间空闲后一定会遗忘。",
         "",
         "## 限制",
@@ -372,16 +395,34 @@ def make_report(report: dict, rows: list[dict], gaps: list[int]) -> None:
         "3. 基线如果多调用了工具，端到端 token 差异会同时包含模型行为漂移；报告单独画出了实际调用次数。",
         "4. `chars/4` 是粗略诊断值；prompt token 图使用 Pi 的 `input + cacheRead + cacheWrite`，不等于账单金额。",
         "",
-        "逐次 usage、读取序列、答案、协议检查和每次请求轨迹见 [`distant-query-results.json`](../results/distant-query-results.json)。",
+        f"逐次 usage、读取序列、答案、过期计数、协议检查和每次请求轨迹见 [`{RESULTS.name}`](../results/{RESULTS.name})。",
         "",
     ])
+    if "expiry" not in ASSET_PREFIX:
+        lines.extend([
+            "受控过期阈值的 12 / 15 filler 边界实验见 [`distant-query-expiry-validation.md`](distant-query-expiry-validation.md)。",
+            "",
+        ])
     DOCS.mkdir(parents=True, exist_ok=True)
-    (DOCS / "distant-query-validation.md").write_text("\n".join(lines), encoding="utf-8")
+    REPORT_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    REPORT_OUTPUT.write_text("\n".join(lines), encoding="utf-8")
 
 
 def main() -> None:
+    global RESULTS, REPORT_OUTPUT, ASSET_PREFIX, LABELS
+    parser = argparse.ArgumentParser(description="Chart distant-query Pi experiments.")
+    parser.add_argument("--input", type=Path, default=RESULTS)
+    parser.add_argument("--report", type=Path, default=REPORT_OUTPUT)
+    parser.add_argument("--asset-prefix", default=ASSET_PREFIX)
+    args = parser.parse_args()
+    RESULTS = args.input if args.input.is_absolute() else ROOT / args.input
+    REPORT_OUTPUT = args.report if args.report.is_absolute() else ROOT / args.report
+    ASSET_PREFIX = args.asset_prefix
     ASSETS.mkdir(parents=True, exist_ok=True)
     report, rows = load_results()
+    max_gap = report.get("maxInterveningToolResults")
+    if max_gap is not None:
+        LABELS[DEDUPE] = f"结果去重（间隔上限 {max_gap}）"
     gaps = sorted({int(row["gap"]) for row in rows})
     if not gaps:
         raise SystemExit("No gap conditions found in distant-query results.")
@@ -392,7 +433,7 @@ def main() -> None:
     fig_quality(report, rows, gaps)
     fig_protocol_components(report, rows, gaps)
     make_report(report, rows, gaps)
-    print(f"Generated 6 distant-query comparison charts and {DOCS / 'distant-query-validation.md'}")
+    print(f"Generated 6 distant-query comparison charts and {REPORT_OUTPUT}")
 
 
 if __name__ == "__main__":

@@ -4,11 +4,14 @@ const ELIGIBLE_TOOLS = new Set(["read", "grep"]);
 
 /** Avoid replacing small results where the reference would save little or nothing. */
 export const DEFAULT_MIN_RESULT_CHARS = 256;
+/** Keep a repeated result fresh after at most this many intervening tool results. */
+export const DEFAULT_MAX_INTERVENING_TOOL_RESULTS = 14;
 
 export interface DeduplicationStats {
   eligibleResults: number;
   uniqueResults: number;
   duplicateOccurrences: number;
+  expiredOccurrences: number;
   suppressedCharacters: number;
   estimatedTokensSuppressed: number;
 }
@@ -27,6 +30,7 @@ interface TextBlock {
 interface FirstOccurrence {
   toolCallId: string;
   index: number;
+  queryOrdinal: number;
 }
 
 /**
@@ -37,27 +41,30 @@ interface FirstOccurrence {
 export function deduplicateToolResults<T>(
   messages: readonly T[],
   minResultChars = DEFAULT_MIN_RESULT_CHARS,
+  maxInterveningToolResults = DEFAULT_MAX_INTERVENING_TOOL_RESULTS,
 ): DeduplicationResult<T> {
   const output = [...messages];
   const seen = new Map<string, FirstOccurrence>();
+  let queryOrdinal = 0;
   const stats: DeduplicationStats = {
     eligibleResults: 0,
     uniqueResults: 0,
     duplicateOccurrences: 0,
+    expiredOccurrences: 0,
     suppressedCharacters: 0,
     estimatedTokensSuppressed: 0,
   };
 
   for (let index = 0; index < messages.length; index += 1) {
     const message = messages[index] as unknown as Record<string, unknown>;
-    if (
-      message.role !== "toolResult" ||
-      typeof message.toolName !== "string" ||
-      !ELIGIBLE_TOOLS.has(message.toolName) ||
-      message.isError === true
-    ) {
-      continue;
-    }
+    if (message.role !== "toolResult") continue;
+
+    // Count every tool result even when its output is short, failed, or from an
+    // unrelated tool: it still moves the older result farther away in context.
+    const currentQueryOrdinal = queryOrdinal;
+    queryOrdinal += 1;
+    if (typeof message.toolName !== "string" || !ELIGIBLE_TOOLS.has(message.toolName)) continue;
+    if (message.isError === true) continue;
 
     const content = message.content;
     if (!Array.isArray(content) || content.length === 0) continue;
@@ -89,8 +96,23 @@ export function deduplicateToolResults<T>(
       seen.set(fingerprint, {
         toolCallId: typeof message.toolCallId === "string" ? message.toolCallId : "unknown",
         index,
+        queryOrdinal: currentQueryOrdinal,
       });
       stats.uniqueResults += 1;
+      continue;
+    }
+
+    const interveningToolResults = currentQueryOrdinal - previous.queryOrdinal - 1;
+    if (interveningToolResults > maxInterveningToolResults) {
+      // Let this full result become the new anchor. The next identical result can
+      // be shortened again until this anchor itself ages out of the window.
+      seen.set(fingerprint, {
+        toolCallId: typeof message.toolCallId === "string" ? message.toolCallId : "unknown",
+        index,
+        queryOrdinal: currentQueryOrdinal,
+      });
+      stats.uniqueResults += 1;
+      stats.expiredOccurrences += 1;
       continue;
     }
 

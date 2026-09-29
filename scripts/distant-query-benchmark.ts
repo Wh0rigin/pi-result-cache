@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from "node:os";
 import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { DEFAULT_MAX_INTERVENING_TOOL_RESULTS } from "../src/deduplicate.ts";
 
 type Arm = "baseline" | "dedupe";
 
@@ -54,6 +55,7 @@ interface RunResult {
   answer: string;
   answerCorrect: boolean;
   duplicateOccurrencesSuppressed: number;
+  expiredOccurrences: number;
   estimatedTokensSuppressed: number;
   suppressedCharacters: number;
   requestUsage: RequestUsage[];
@@ -73,7 +75,7 @@ interface JsonEvent {
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const EXTENSION = join(ROOT, "index.ts");
-const RESULT_PATH = join(ROOT, "results", "distant-query-results.json");
+const DEFAULT_RESULT_PATH = join(ROOT, "results", "distant-query-results.json");
 const MODEL = process.env.PI_BENCH_MODEL ?? "cc-switch-packy-code/glm-5.3-flash";
 const TARGET_ROW_COUNT = 72;
 const TARGET_ROW = 53;
@@ -85,6 +87,19 @@ function parsePositiveIntFlag(name: string, fallback: number): number {
   const raw = index >= 0 ? process.argv[index + 1] : undefined;
   const value = Number(raw);
   return Number.isInteger(value) && value > 0 ? value : fallback;
+}
+
+function parseNonNegativeIntFlag(name: string, fallback: number): number {
+  const index = process.argv.indexOf(name);
+  if (index < 0) return fallback;
+  const value = Number(process.argv[index + 1]);
+  return Number.isInteger(value) && value >= 0 ? value : fallback;
+}
+
+function parseResultPath(): string {
+  const index = process.argv.indexOf("--results");
+  const value = index >= 0 ? process.argv[index + 1] : undefined;
+  return value ? resolve(ROOT, value) : DEFAULT_RESULT_PATH;
 }
 
 function parseGaps(): number[] {
@@ -237,6 +252,7 @@ function checkProtocol(calls: ReadCall[], workspace: string, gap: number): {
 
 function readPluginMetrics(path: string): {
   duplicateOccurrences: number;
+  expiredOccurrences: number;
   estimatedTokensSuppressed: number;
   suppressedCharacters: number;
 } {
@@ -246,22 +262,31 @@ function readPluginMetrics(path: string): {
       (sum, line) => {
         const stats = JSON.parse(line) as {
           duplicateOccurrences?: number;
+          expiredOccurrences?: number;
           estimatedTokensSuppressed?: number;
           suppressedCharacters?: number;
         };
         sum.duplicateOccurrences += stats.duplicateOccurrences ?? 0;
+        sum.expiredOccurrences += stats.expiredOccurrences ?? 0;
         sum.estimatedTokensSuppressed += stats.estimatedTokensSuppressed ?? 0;
         sum.suppressedCharacters += stats.suppressedCharacters ?? 0;
         return sum;
       },
-      { duplicateOccurrences: 0, estimatedTokensSuppressed: 0, suppressedCharacters: 0 },
+      { duplicateOccurrences: 0, expiredOccurrences: 0, estimatedTokensSuppressed: 0, suppressedCharacters: 0 },
     );
   } catch {
-    return { duplicateOccurrences: 0, estimatedTokensSuppressed: 0, suppressedCharacters: 0 };
+    return { duplicateOccurrences: 0, expiredOccurrences: 0, estimatedTokensSuppressed: 0, suppressedCharacters: 0 };
   }
 }
 
-function runOne(arm: Arm, seed: number, gap: number, workspace: string, expectedAnswer: string): RunResult {
+function runOne(
+  arm: Arm,
+  seed: number,
+  gap: number,
+  maxGap: number,
+  workspace: string,
+  expectedAnswer: string,
+): RunResult {
   const metricsPath = join(workspace, "result-cache-metrics.jsonl");
   const args = [
     "--mode", "json",
@@ -288,7 +313,10 @@ function runOne(arm: Arm, seed: number, gap: number, workspace: string, expected
     env: {
       ...process.env,
       PI_SKIP_VERSION_CHECK: "1",
-      ...(arm === "dedupe" ? { PI_RESULT_CACHE_STATS_FILE: metricsPath } : {}),
+      ...(arm === "dedupe" ? {
+        PI_RESULT_CACHE_STATS_FILE: metricsPath,
+        PI_RESULT_CACHE_MAX_GAP: String(maxGap),
+      } : {}),
     },
   });
   const wallSeconds = (Date.now() - started) / 1000;
@@ -297,7 +325,7 @@ function runOne(arm: Arm, seed: number, gap: number, workspace: string, expected
   const parsed = parseEvents(result.stdout ?? "");
   const metrics = arm === "dedupe"
     ? readPluginMetrics(metricsPath)
-    : { duplicateOccurrences: 0, estimatedTokensSuppressed: 0, suppressedCharacters: 0 };
+    : { duplicateOccurrences: 0, expiredOccurrences: 0, estimatedTokensSuppressed: 0, suppressedCharacters: 0 };
   const protocol = checkProtocol(parsed.readCalls, workspace, gap);
   const promptTokensProcessed = parsed.usage.input + parsed.usage.cacheRead + parsed.usage.cacheWrite;
   const answer = parsed.finalText.trim();
@@ -328,6 +356,7 @@ function runOne(arm: Arm, seed: number, gap: number, workspace: string, expected
     answer,
     answerCorrect: answer === expectedAnswer,
     duplicateOccurrencesSuppressed: metrics.duplicateOccurrences,
+    expiredOccurrences: metrics.expiredOccurrences,
     estimatedTokensSuppressed: metrics.estimatedTokensSuppressed,
     suppressedCharacters: metrics.suppressedCharacters,
     requestUsage: parsed.requestUsage,
@@ -347,10 +376,12 @@ async function main(): Promise<void> {
   const gaps = parseGaps();
   const seeds = parsePositiveIntFlag("--seeds", 3);
   const seedStart = parsePositiveIntFlag("--seed-start", 1);
+  const maxGap = parseNonNegativeIntFlag("--max-gap", DEFAULT_MAX_INTERVENING_TOOL_RESULTS);
+  const resultPath = parseResultPath();
   const appendResults = process.argv.includes("--append");
   if (!existsSync(EXTENSION)) throw new Error(`Extension not found: ${EXTENSION}`);
 
-  console.log(`Pi distant-query A/B benchmark: gaps=${gaps.join(",")} seeds=${seeds}`);
+  console.log(`Pi distant-query A/B benchmark: gaps=${gaps.join(",")} seeds=${seeds} max-intervening-tool-results=${maxGap}`);
   console.log(`model=${MODEL}; target=${TARGET_ROW_COUNT} rows; gap files=${FILLER_ROW_COUNT} rows each`);
 
   const results: RunResult[] = [];
@@ -368,13 +399,13 @@ async function main(): Promise<void> {
       try {
         for (const arm of order) {
           process.stdout.write(`[gap ${gap} seed ${seed}] ${arm} ... `);
-          const run = runOne(arm, seed, gap, workspace, target.answer);
+          const run = runOne(arm, seed, gap, maxGap, workspace, target.answer);
           results.push(run);
           console.log(
             `${run.wallSeconds.toFixed(1)}s | prompt ${run.promptTokensProcessed} | requests ${run.assistantRequests} | ` +
             `target ${run.targetReadCalls}/2 | filler ${run.fillerReadCalls}/${gap} | ` +
             `${run.answerCorrect ? "correct" : "wrong"} | ${run.protocolCompliant ? "protocol" : "protocol-drift"}` +
-            (arm === "dedupe" ? ` | suppressed≈${run.estimatedTokensSuppressed} tokens` : "") +
+            (arm === "dedupe" ? ` | suppressed≈${run.estimatedTokensSuppressed} tokens | expired=${run.expiredOccurrences}` : "") +
             (run.error ? ` | ${run.error}` : ""),
           );
         }
@@ -407,6 +438,7 @@ async function main(): Promise<void> {
               answer: "",
               answerCorrect: false,
               duplicateOccurrencesSuppressed: 0,
+              expiredOccurrences: 0,
               estimatedTokensSuppressed: 0,
               suppressedCharacters: 0,
               requestUsage: [],
@@ -420,10 +452,10 @@ async function main(): Promise<void> {
     }
   }
 
-  mkdirSync(dirname(RESULT_PATH), { recursive: true });
+  mkdirSync(dirname(resultPath), { recursive: true });
   let combinedResults = results;
-  if (appendResults && existsSync(RESULT_PATH)) {
-    const previous = JSON.parse(readFileSync(RESULT_PATH, "utf8")) as { results?: RunResult[] };
+  if (appendResults && existsSync(resultPath)) {
+    const previous = JSON.parse(readFileSync(resultPath, "utf8")) as { results?: RunResult[] };
     const keys = new Set(results.map((run) => `${run.gap}:${run.seed}:${run.arm}`));
     combinedResults = [
       ...(previous.results ?? []).filter((run) => !keys.has(`${run.gap}:${run.seed}:${run.arm}`)),
@@ -437,19 +469,20 @@ async function main(): Promise<void> {
     piVersion: "0.87.1",
     repetitionsPerCondition: seeds,
     gaps,
+    maxInterveningToolResults: maxGap,
     fixture: { targetRows: TARGET_ROW_COUNT, targetRow: TARGET_ROW, fillerRows: FILLER_ROW_COUNT },
     task: "Read target.txt, read distinct filler files during an intervening gap, then read target.txt again and return its target token.",
     arms: ["baseline (extension disabled)", "dedupe (request-local context deduplication)"],
     results: combinedResults,
   };
-  writeFileSync(RESULT_PATH, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  writeFileSync(resultPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 
-  console.log(`\nSaved aggregate results to ${RESULT_PATH}`);
+  console.log(`\nSaved aggregate results to ${resultPath}`);
   for (const run of report.results) {
     console.log(
       `${run.arm.padEnd(8)} gap=${run.gap} seed=${run.seed} prompt=${run.promptTokensProcessed} ` +
       `requests=${run.assistantRequests} correct=${run.answerCorrect} protocol=${run.protocolCompliant} ` +
-      `target=${run.targetReadCalls} filler=${run.fillerReadCalls} hits=${run.duplicateOccurrencesSuppressed}`,
+      `target=${run.targetReadCalls} filler=${run.fillerReadCalls} hits=${run.duplicateOccurrencesSuppressed} expired=${run.expiredOccurrences}`,
     );
   }
 }

@@ -1,23 +1,37 @@
 import { appendFileSync } from "node:fs";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
-import { deduplicateToolResults, type DeduplicationStats } from "./src/deduplicate.ts";
+import {
+  DEFAULT_MAX_INTERVENING_TOOL_RESULTS,
+  deduplicateToolResults,
+  type DeduplicationStats,
+} from "./src/deduplicate.ts";
 
 const COMMAND = "result-cache";
+
+function maxInterveningToolResultsFromEnv(): number {
+  const configured = Number(process.env.PI_RESULT_CACHE_MAX_GAP);
+  return Number.isInteger(configured) && configured >= 0
+    ? configured
+    : DEFAULT_MAX_INTERVENING_TOOL_RESULTS;
+}
 
 export default function resultCacheExtension(pi: ExtensionAPI) {
   let enabled = true;
   let contextRequests = 0;
   let duplicateOccurrences = 0;
+  let expiredOccurrences = 0;
   let suppressedCharacters = 0;
   let estimatedTokensSuppressed = 0;
   const metricsFile = process.env.PI_RESULT_CACHE_STATS_FILE;
+  const maxInterveningToolResults = maxInterveningToolResultsFromEnv();
 
   pi.on("context", (event) => {
     contextRequests += 1;
     if (!enabled) return;
 
-    const result = deduplicateToolResults(event.messages);
+    const result = deduplicateToolResults(event.messages, undefined, maxInterveningToolResults);
     duplicateOccurrences += result.stats.duplicateOccurrences;
+    expiredOccurrences += result.stats.expiredOccurrences;
     suppressedCharacters += result.stats.suppressedCharacters;
     estimatedTokensSuppressed += result.stats.estimatedTokensSuppressed;
 
@@ -49,6 +63,7 @@ export default function resultCacheExtension(pi: ExtensionAPI) {
       else if (subcommand === "reset") {
         contextRequests = 0;
         duplicateOccurrences = 0;
+        expiredOccurrences = 0;
         suppressedCharacters = 0;
         estimatedTokensSuppressed = 0;
       }
@@ -58,6 +73,7 @@ export default function resultCacheExtension(pi: ExtensionAPI) {
           `result-cache ${enabled ? "enabled" : "disabled"}`,
           `context requests: ${contextRequests}`,
           `duplicate results suppressed: ${duplicateOccurrences}`,
+          `old results expired after ${maxInterveningToolResults} intervening tool results: ${expiredOccurrences}`,
           `estimated input tokens suppressed: ${estimatedTokensSuppressed}`,
           `characters suppressed: ${suppressedCharacters}`,
           "Usage: /result-cache [on|off|reset|status]",
