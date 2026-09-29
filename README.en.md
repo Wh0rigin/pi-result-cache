@@ -14,7 +14,7 @@ This can reduce repeated result text in later input contexts. It does not remove
 
 ## Overall call flow
 
-The diagram shows the complete path from the user prompt and tool execution through the `context` event to the model request, including where duplicate results are replaced.
+The diagram shows the complete path from the user prompt and tool execution through the `context` event to the model request, including the expiry rule that preserves and refreshes the full-result anchor after 15 intervening tool results by default.
 
 ![pi-result-cache overall call flow](assets/call-flow.svg)
 

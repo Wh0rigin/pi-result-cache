@@ -3,7 +3,7 @@ digraph PiResultCacheFlow {
     rankdir=TB,
     bgcolor="#ffffff",
     fontname="Microsoft YaHei",
-    label="pi-result-cache 整体调用流程",
+    label="pi-result-cache 整体调用流程（含 15 条工具结果过期机制）",
     labelloc=t,
     labeljust=c,
     fontsize=22,
@@ -41,16 +41,20 @@ digraph PiResultCacheFlow {
   transcript [label="工具结果加入对话上下文\n原始结果仍写入 Pi 会话", fillcolor="#f2f4f7", color="#64748b"];
 
   context [label="context 事件\n每次发起模型请求前触发", fillcolor="#fff6e5", color="#b7791f"];
-  inspect [label="插件筛选\nrole=toolResult · read/grep · 成功\n纯文本且长度 ≥ 256 字符", fillcolor="#eaf7f0", color="#36805f"];
+  scan [label="扫描当前完整对话\n每条 toolResult 都计入间隔计数", fillcolor="#fff6e5", color="#b7791f"];
+  inspect [label="候选结果筛选\nread / grep · 成功 · 纯文本\n长度 ≥ 256 字符", fillcolor="#eaf7f0", color="#36805f"];
   hash [label="计算 SHA-256\nhash(toolName + content)", fillcolor="#eaf7f0", color="#36805f"];
-  decision [shape=diamond, label="哈希\n已出现？", fillcolor="#fff6e5", color="#b7791f", margin="0.14,0.08"];
-  original [label="首次结果\n保留完整内容", fillcolor="#eaf7f0", color="#36805f"];
-  duplicate [label="重复结果\n替换为短引用\n[pi-result-cache] Exact duplicate...", fillcolor="#eaf7f0", color="#36805f"];
-  unchanged [label="不符合条件\n原样保留", fillcolor="#f2f4f7", color="#64748b"];
+  decision [shape=diamond, label="已有相同\n完整结果锚点？", fillcolor="#fff6e5", color="#b7791f", margin="0.14,0.08"];
+  original [label="首次出现\n保留完整结果\n作为比较锚点", fillcolor="#eaf7f0", color="#36805f"];
+  age [shape=diamond, label="距最近完整锚点\n已达过期阈值？", fillcolor="#fff6e5", color="#b7791f", margin="0.14,0.08"];
+  duplicate [label="未过期：重复结果\n替换为指向锚点的短引用\n节省后续请求上下文", fillcolor="#eaf7f0", color="#36805f"];
+  expired [label="已过期：保留本次完整结果\n旧锚点更新为本次结果\n后续重复可重新压缩", fillcolor="#eaf7f0", color="#36805f"];
+  unchanged [label="不符合候选条件\n原样保留", fillcolor="#f2f4f7", color="#64748b"];
 
   request [label="Pi 发送变换后的上下文\n给模型提供方", fillcolor="#eaf2ff", color="#4f79a7"];
   response [label="模型继续调用工具\n或返回最终答案", fillcolor="#f5efff", color="#8064a2"];
   session [label="Pi 持久会话记录\n插件不改写", shape=note, fillcolor="#f2f4f7", color="#64748b"];
+  config [label="过期阈值可配置\n默认：15 条中间 toolResult\nPI_RESULT_CACHE_EXPIRE_AFTER=N\n/result-cache expire-after N", shape=note, fillcolor="#eef2ff", color="#4f79a7"];
   metrics [label="可选诊断\n/result-cache status\nPI_RESULT_CACHE_STATS_FILE", shape=note, fillcolor="#f2f4f7", color="#64748b"];
 
   user -> pi_start;
@@ -58,17 +62,22 @@ digraph PiResultCacheFlow {
   model_call -> tool_exec [label="工具调用"];
   tool_exec -> transcript [label="toolResult"];
   transcript -> context;
-  context -> inspect;
+  context -> scan;
+  scan -> inspect;
   inspect -> hash [label="符合条件"];
   inspect -> unchanged [label="其他结果"];
   hash -> decision;
   decision -> original [label="否"];
-  decision -> duplicate [label="是"];
+  decision -> age [label="是"];
+  age -> duplicate [label="未达到阈值"];
+  age -> expired [label="达到阈值"];
   original -> request;
   duplicate -> request;
+  expired -> request;
   unchanged -> request;
   request -> response [label="模型继续推理"];
-  response -> tool_exec [label="仍需工具时", constraint=false];
+  response -> tool_exec [constraint=false];
   response -> session [style=dashed, arrowhead=none, label="会话保留原始记录"];
+  config -> age [style=dashed, label="阈值设置"];
   context -> metrics [style=dashed, arrowhead=none, label="可选统计"];
 }

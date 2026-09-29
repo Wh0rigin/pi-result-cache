@@ -16,7 +16,7 @@ English version: [README.en.md](README.en.md)
 
 ## 整体调用流程
 
-下图展示从用户提示词、工具执行、`context` 事件到模型请求的完整链路，以及重复结果被替换的位置。
+下图展示从用户提示词、工具执行、`context` 事件到模型请求的完整链路，以及默认 15 条工具结果后完整保留并更新缓存锚点的过期机制。
 
 ![pi-result-cache 整体调用流程](assets/call-flow.svg)
 
